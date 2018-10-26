@@ -1,0 +1,35 @@
+{
+  "name": "continuous-learning",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=development webpack-dev-server --hot --inline --mode=development --config webpack.js",
+    "start-do-dev": "NODE_ENV=development webpack-dev-server --host 0.0.0.0 --port 3000 --config webpack.js",
+    "bundle": "rm ./dist/index.html; rm ./dist/app*; mkdir ./dist; NODE_ENV=production; webpack --mode=production --config webpack.js",
+    "start-prod": "npm run bundle; node server.js"
+  },
+  "author": "Travis Bumgarner, Alan Inacio, Max Krieg",
+  "license": "ISC",
+  "dependencies": {
+    "@material-ui/core": "^3.3.1",
+    "axios": "^0.18.0",
+    "express": "^4.16.4",
+    "firebase": "^5.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "react-router-dom": "^4.3.1",
+    "styled-components": "^4.0.2",
+    "webpack": "^4.23.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  }
+}
