@@ -1,3 +1,4 @@
-import Skill from './Skill/Skill'
+import SelectSkills from './SelectSkills/SelectSkills'
+import RateSkill from './RateSkill/RateSkill'
 
-export { Skill }
+export { RateSkill, SelectSkills }

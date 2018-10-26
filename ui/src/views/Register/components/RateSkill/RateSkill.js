@@ -10,7 +10,7 @@ type State = {
     foo: number
 }
 
-class Skill extends React.Component<Props, State> {
+class RateSkill extends React.Component<Props, State> {
     state = {
         foo: 5
     }
@@ -22,4 +22,4 @@ class Skill extends React.Component<Props, State> {
     }
 }
 
-export default Skill
+export default RateSkill
