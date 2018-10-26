@@ -7,7 +7,8 @@
     "start": "NODE_ENV=development webpack-dev-server --hot --inline --mode=development --config webpack.js",
     "start-do-dev": "NODE_ENV=development webpack-dev-server --host 0.0.0.0 --port 3000 --config webpack.js",
     "bundle": "rm ./dist/index.html; rm ./dist/app*; mkdir ./dist; NODE_ENV=production; webpack --mode=production --config webpack.js",
-    "start-prod": "npm run bundle; node server.js"
+    "start-prod": "npm run bundle; node server.js",
+    "flow": "flow"
   },
   "author": "Travis Bumgarner, Alan Inacio, Max Krieg",
   "license": "ISC",
@@ -25,10 +26,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
+    "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.4",
-    "babel-plugin-transform-class-properties": "^6.24.1",
+    "flow-bin": "^0.84.0",
+    "flow-typed": "^2.5.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
   }

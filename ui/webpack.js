@@ -5,7 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 let apiHost
 let publicPath
 
-
 setupEnv = () => {
     console.log(process.env.NODE_ENV)
     switch (process.env.NODE_ENV) {
@@ -48,9 +47,8 @@ module.exports = env => {
                     test: /\.js$/,
                     exclude: /node_modules/,
                     loader: 'babel-loader',
-                    query: {
-                        presets: ['@babel/preset-env', '@babel/preset-react'],
-                        plugins: [require('babel-plugin-transform-class-properties')]
+                    options: {
+                        babelrc: true
                     }
                 }
             ]
