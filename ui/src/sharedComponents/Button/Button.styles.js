@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { FONT_SIZE_INPUTS_AND_BUTTONS, FONT_FAMILY_TEXT } from 'Theme'
+import { FONT_SIZE_INPUTS_AND_BUTTONS, FONT_FAMILY_TEXT } from 'theme'
 
 const StyledButton = styled.button`
     width: 100%;

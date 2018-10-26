@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { FONT_SIZE_INPUTS_AND_BUTTONS, FONT_FAMILY_TEXT } from 'Theme'
+import { FONT_SIZE_INPUTS_AND_BUTTONS, FONT_FAMILY_TEXT } from 'theme'
 
 const sharedStyles = props => css`
     padding: 15px 15px 15px 0;

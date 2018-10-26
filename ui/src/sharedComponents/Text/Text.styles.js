@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { FONT_FAMILY_TEXT, CONTENT_SPACING, TEXT_FONT_SIZES } from 'Theme'
+import { FONT_FAMILY_TEXT, CONTENT_SPACING, TEXT_FONT_SIZES } from 'theme'
 
 const DefaultText = styled.p`
     color: ${props => (props.inverted ? 'white' : 'black')};
