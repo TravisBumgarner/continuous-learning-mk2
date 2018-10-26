@@ -1,25 +1,26 @@
 // @flow
 
 import * as React from 'react'
+import Slider from '@material-ui/lab/Slider'
+
+import { Text } from 'sharedComponents'
 
 type Props = {
-    /* ... */
+    skill: string,
+    value: number,
+    handleChange: (skill: string, value: number) => void
 }
 
-type State = {
-    foo: number
-}
+type State = {}
 
-class RateSkill extends React.Component<Props, State> {
-    state = {
-        foo: 5
-    }
-
-    render() {
-        const { foo } = this.state
-
-        return <p>{foo}</p>
-    }
+const RateSkill = ({ skill, handleChange, value }: Props) => {
+    console.log(skill, handleChange, value)
+    return (
+        <div>
+            <Text>{skill}</Text>
+            <Slider value={value} min={0} max={10} step={1} onChange={(_, value) => handleChange(skill, value)} />
+        </div>
+    )
 }
 
 export default RateSkill

@@ -1,31 +1,45 @@
-// @flow
-
 import * as React from 'react'
 import Button from '@material-ui/core/Button'
 
-type Props = {
-    skills: Array<string>,
-    selectedSkills: Set<string>,
-    onClick: Function
-}
+const SUPPORTED_SKILLS = ['c_sharp', 'f_sharp', 'javascript', 'python', 'go']
 
-type State = {}
+class SelectSkills extends React.Component<Props, State> {
+    state = {
+        selectedSkills: []
+    }
 
-const SelectSkills = ({ skills, onClick }: Props) => {
-    const SkillButtons = Object.values(skills).map(({ skill, isSelected }) => {
-        return (
-            <Button
-                key={skill}
-                onClick={() => onClick(skill)}
-                variant="contained"
-                color={isSelected ? 'primary' : 'default'}
-            >
-                {skill}
-            </Button>
-        )
-    })
+    toggleSkill = skill => {
+        const { selectedSkills } = this.state
 
-    return SkillButtons
+        let selectedSkillsPatch = [...selectedSkills]
+        const selectedSkillIndex = selectedSkills.indexOf(skill)
+        if (selectedSkillIndex === -1) {
+            selectedSkillsPatch.push(skill)
+        } else {
+            selectedSkillsPatch.splice(selectedSkillIndex, 1)
+        }
+        console.log(selectedSkillsPatch)
+        this.setState({ selectedSkills: selectedSkillsPatch })
+    }
+
+    render() {
+        const { selectedSkills } = this.state
+
+        const SkillsToggles = SUPPORTED_SKILLS.map(skill => {
+            return (
+                <Button
+                    key={skill}
+                    onClick={() => this.toggleSkill(skill)}
+                    variant="contained"
+                    color={selectedSkills.includes(skill) ? 'primary' : 'default'}
+                >
+                    {skill}
+                </Button>
+            )
+        })
+
+        return <div>{SkillsToggles}</div>
+    }
 }
 
 export default SelectSkills

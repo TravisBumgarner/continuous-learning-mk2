@@ -32,7 +32,7 @@ module.exports = env => {
         },
         resolve: {
             alias: {
-                components: path.resolve(__dirname, 'src/components/'),
+                sharedComponents: path.resolve(__dirname, 'src/sharedComponents/'),
                 containers: path.resolve(__dirname, 'src/containers/'),
                 views: path.resolve(__dirname, 'src/views/'),
                 theme: path.resolve(__dirname, 'src/theme.js'),
