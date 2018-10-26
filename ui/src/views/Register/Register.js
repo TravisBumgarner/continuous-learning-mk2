@@ -1,13 +1,15 @@
-// @flow
+// @glow
 
 import * as React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import { SignUp } from 'views'
-import { SelectSkills } from './components'
+import { SelectSkills, RateSkill } from './components'
 
-const SUPPORTED_SKILLS = ['C#', 'F#', 'JavaScript', 'Python', 'Go']
-type SUPPORTED_SKILLS_TYPE = 'C#' | 'F#' | 'JavaScript' | 'Python' | 'Go'
+const SUPPORTED_SKILLS = ['c_sharp', 'f_sharp', 'javascript', 'python', 'go']
+const DEFAULT_SUPPORTED_SKILLS_STATE = {}
+SUPPORTED_SKILLS.map(skill => (DEFAULT_SUPPORTED_SKILLS_STATE[skill] = { skill, value: 0, isSelected: false }))
+// type SUPPORTED_SKILLS_TYPE = 'C#' | 'F#' | 'JavaScript' | 'Python' | 'Go'
 
 // const DEFAULT_SELECTED_SKILLS = {}
 // SUPPORTED_SKILLS.map(skill => (DEFAULT_SELECTED_SKILLS[skill] = false))
@@ -16,34 +18,38 @@ type Props = {
     /* ... */
 }
 
-type State = {
-    selectedSkills: Set<string>
-}
+type State = {}
 
 class Register extends React.Component<Props, State> {
     state = {
-        selectedSkills: new Set()
+        skills: DEFAULT_SUPPORTED_SKILLS_STATE
     }
 
-    toggleSkill = (skill: SUPPORTED_SKILLS_TYPE) => {
-        const { selectedSkills } = this.state
-        const selectedSkillsPatch = new Set(selectedSkills)
-
-        if (selectedSkills.has(skill)) {
-            selectedSkillsPatch.delete(skill)
+    toggleSkill = skill => {
+        const { skills } = this.state
+        const skillsPatch = { ...skills }
+        if (skills[skill].isSelected) {
+            skillsPatch[skill] = { skill, value: 0, isSelected: false }
         } else {
-            selectedSkillsPatch.add(skill)
+            skillsPatch[skill] = { skill, value: 0, isSelected: true }
         }
-
-        this.setState({ selectedSkills: selectedSkillsPatch })
+        this.setState({ skills: skillsPatch })
     }
+
+    handleSkillRating = (skill: SUPPORTED_SKILLS_TYPE, value: number) => {}
 
     render() {
-        const { selectedSkills } = this.state
+        const { skills } = this.state
+
+        // const RateSkills = Array.from(selectedSkills).map(skill => {
+        //     return <RateSkill key={skill} skill={skill} value={0} handleChange={this.handleSkillRating} />
+        // })
+
         return (
-            <p>
-                <SelectSkills selectedSkills={selectedSkills} skills={SUPPORTED_SKILLS} onClick={this.toggleSkill} />
-            </p>
+            <div>
+                <SelectSkills skills={skills} onClick={this.toggleSkill} />
+                {/* {RateSkills} */}
+            </div>
         )
     }
 }

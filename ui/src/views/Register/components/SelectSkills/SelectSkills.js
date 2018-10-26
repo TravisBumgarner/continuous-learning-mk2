@@ -11,14 +11,14 @@ type Props = {
 
 type State = {}
 
-const SelectSkills = ({ skills, onClick, selectedSkills }: Props) => {
-    const SkillButtons = skills.map(skill => {
+const SelectSkills = ({ skills, onClick }: Props) => {
+    const SkillButtons = Object.values(skills).map(({ skill, isSelected }) => {
         return (
             <Button
                 key={skill}
                 onClick={() => onClick(skill)}
                 variant="contained"
-                color={selectedSkills.has(skill) ? 'primary' : 'default'}
+                color={isSelected ? 'primary' : 'default'}
             >
                 {skill}
             </Button>
