@@ -1,7 +1,7 @@
 import App from './App/App'
-import SignUp from './SignUp/SignUp'
+import Register from './Register/Register'
 
 export {
-    App, 
-    SignUp
+    App,
+    Register
 }

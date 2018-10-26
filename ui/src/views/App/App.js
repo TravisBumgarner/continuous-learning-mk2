@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-import { SignUp } from 'views'
-
+import { Register } from 'views'
 
 class App extends Component {
-    render(){
+    render() {
         return (
-        <BrowserRouter>
-            <Switch>
-                <Route path="/signup" component={SignUp} />
-            </Switch>
-        </BrowserRouter>)
+            <BrowserRouter>
+                <Switch>
+                    <Route path="/" component={Register} />
+                    <Route path="/register" component={Register} />
+                </Switch>
+            </BrowserRouter>
+        )
     }
 }
 
