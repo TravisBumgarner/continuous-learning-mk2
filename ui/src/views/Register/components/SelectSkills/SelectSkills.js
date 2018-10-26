@@ -4,12 +4,13 @@ import Button from '@material-ui/core/Button'
 const SUPPORTED_SKILLS = ['c_sharp', 'f_sharp', 'javascript', 'python', 'go']
 
 class SelectSkills extends React.Component<Props, State> {
-    state = {
-        selectedSkills: []
-    }
+    // state = {
+    //     selectedSkills: []
+    // }
 
     toggleSkill = skill => {
-        const { selectedSkills } = this.state
+        // const {  } = this.state
+        const { onChange, selectedSkills } = this.props
 
         let selectedSkillsPatch = [...selectedSkills]
         const selectedSkillIndex = selectedSkills.indexOf(skill)
@@ -19,11 +20,12 @@ class SelectSkills extends React.Component<Props, State> {
             selectedSkillsPatch.splice(selectedSkillIndex, 1)
         }
         console.log(selectedSkillsPatch)
-        this.setState({ selectedSkills: selectedSkillsPatch })
+        // this.setState({ selectedSkills: selectedSkillsPatch })
+        onChange(selectedSkillsPatch)
     }
 
     render() {
-        const { selectedSkills } = this.state
+        const { selectedSkills } = this.props
 
         const SkillsToggles = SUPPORTED_SKILLS.map(skill => {
             return (
