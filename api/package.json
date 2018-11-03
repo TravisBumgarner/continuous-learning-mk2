@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/TravisBumgarner/continuous-learning-mk2#readme",
   "dependencies": {
+    "esm": "^3.0.84",
     "express": "^4.16.4"
   }
 }
