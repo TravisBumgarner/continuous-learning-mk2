@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "node -r esm index.js"
+    "start:dev": "node -r esm index.js",
+    "test": "mocha -r esm \"./src/**/*.spec.js\""
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,8 @@
   "dependencies": {
     "esm": "^3.0.84",
     "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
   }
 }
