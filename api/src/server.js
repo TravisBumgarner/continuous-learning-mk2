@@ -1,5 +1,5 @@
-import app from "./app";
+import app from "./app"
 
-const port = 3000;
+const port = 3000
 
-app.listen(port, () => console.log(`Listening on port ${port}!`));
+app.listen(port, () => console.log(`Listening on port ${port}!`))

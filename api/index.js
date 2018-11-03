@@ -1,2 +1,2 @@
-require = require("esm")(module /*, options*/);
-module.exports = require("./src/server.js");
+require = require("esm")(module /*, options*/)
+module.exports = require("./src/server.js")
