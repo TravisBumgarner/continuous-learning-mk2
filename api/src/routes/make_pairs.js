@@ -2,7 +2,7 @@
 // make pairs
 // if three left, make mob
 
-import { knex, users } from "../db"
+import { knex, users, pairs } from "../db"
 
 // Below code came from the internet, doesn't work for odd numbers of users.
 var splitAt = function(i, xs) {
@@ -29,8 +29,16 @@ const makePairs = () => {
     return users
         .getActive()
         .then(activeUsers => {
-            const pairedUsers = zip(splitAt(activeUsers.length / 2, shuffle(activeUsers)))
-            return pairedUsers
+            const activeUserIds = activeUsers.map(user => user.user_id)
+            const pairedUserIds = zip(splitAt(activeUserIds.length / 2, shuffle(activeUserIds)))
+            return pairedUserIds
+        })
+        .then(pairedUserIds => {
+            return pairedUserIds.map(([id_left, id_right]) => pairs.create(id_left, id_right))
+        })
+        .then(result => {
+            console.log(result)
+            return "Pairing done!"
         })
         .catch(error => console.log(error))
 }
