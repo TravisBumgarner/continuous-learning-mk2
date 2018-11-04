@@ -1,3 +1,4 @@
 import users from "./users"
+import languages from "./languages"
 
-export { users }
+export { users, languages }
