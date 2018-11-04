@@ -1,4 +1,4 @@
-import { users } from "../../db"
+import { languages } from "../../db"
 
 const generateErrorMessage = (errorCode, user_id) => {
     const ERROR_CODES_DICT = {}
@@ -8,10 +8,11 @@ const generateErrorMessage = (errorCode, user_id) => {
 }
 
 const generateBody = async ({ user_id, user_name, team_domain }) => {
-    return users
-        .remove({ user_id, user_name, team_domain })
-        .then(wasDeleted => {
-            return wasDeleted ? `<@${user_id}> has been removed.` : `<@${user_id}> does not exist.`
+    return languages
+        .getActive()
+        .then(response => {
+            const availableLanguages = response.map(row => row.language).join(", ")
+            return `Available languages are ${availableLanguages}`
         })
         .catch(error => generateErrorMessage(error.code, user_id))
 }

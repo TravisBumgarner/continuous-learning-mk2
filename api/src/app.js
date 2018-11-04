@@ -19,6 +19,8 @@ app.post("/", (request, response) => {
         routes.subscribe(request.body).then(responseBody => response.send(responseBody))
     } else if (text === "unsubscribe") {
         routes.unsubscribe(request.body).then(responseBody => response.send(responseBody))
+    } else if (text === "list_languages") {
+        routes.list_languages(request.body).then(responseBody => response.send(responseBody))
     } else {
         response.send("Invalid command. Try running `/pairme help` to see available options.")
     }
