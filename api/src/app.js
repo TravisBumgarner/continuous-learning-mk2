@@ -16,7 +16,9 @@ app.post("/", (request, response) => {
         const responseBody = routes.help(request.body)
         response.send(responseBody)
     } else if (text === "subscribe") {
-        routes.subscribe(request.body).then(responseBody => { response.send(responseBody))
+        routes.subscribe(request.body).then(responseBody => {
+            response.send(responseBody)
+        })
     } else {
         response.send("Invalid command. Try running `/pairme help` to see available options.")
     }
