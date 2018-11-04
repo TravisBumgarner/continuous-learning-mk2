@@ -26,9 +26,9 @@ const GETTING_STARTED_COMMANDS = [
         example: formatExample("my_languages javascript,python")
     },
     {
-        subCommand: "available_languages",
-        message: "See available languages",
-        example: formatExample("available_languages")
+        subCommand: "list_languages",
+        message: "See list of available languages",
+        example: formatExample("list_languages")
     }
 ]
 
