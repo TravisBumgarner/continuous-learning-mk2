@@ -2,6 +2,7 @@ import express from "express"
 import bodyParser from "body-parser"
 
 import * as routes from "./routes"
+import { makePairs } from "./adhocs"
 
 const app = express()
 
@@ -27,6 +28,10 @@ app.post("/", (request, response) => {
     } else {
         response.send("Invalid command. Try running `/pairme help` to see available options.")
     }
+})
+
+app.get("/makePairs", (request, response) => {
+    makePairs().then(pairs => response.send(pairs))
 })
 
 app.get("/ok", (request, response) => response.send("Service is running"))
