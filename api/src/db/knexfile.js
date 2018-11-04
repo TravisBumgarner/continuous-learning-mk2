@@ -11,7 +11,10 @@ module.exports = {
             database: "travisbumgarner"
         },
         migrations: {
-            directory: __dirname + "/db/migrations"
+            directory: "./migrations"
+        },
+        seeds: {
+            directory: "./seeds"
         }
     }
 }
