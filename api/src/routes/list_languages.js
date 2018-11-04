@@ -1,4 +1,4 @@
-import { languages } from "../../db"
+import { languages } from "../db"
 
 const generateErrorMessage = (errorCode, user_id) => {
     const ERROR_CODES_DICT = {}

@@ -10,11 +10,10 @@ const app = express()
 app.use(bodyParser())
 
 app.post("/", (request, response) => {
-    const { command, text, user_id, user_name, channel_name, channel_id, team_domain } = request.body
-
+    // For reference, request.body: { command, text, user_id, user_name, channel_name, channel_id, team_domain }
+    const { text } = request.body
     if (text === "" || text === "help") {
-        const responseBody = routes.help(request.body)
-        response.send(responseBody)
+        response.send(routes.help())
     } else if (text === "subscribe") {
         routes.subscribe(request.body).then(responseBody => response.send(responseBody))
     } else if (text === "unsubscribe") {
