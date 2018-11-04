@@ -1,4 +1,6 @@
-const formatExample = command => `\`/pairme ${command}\``
+import { ROOT_COMMAND } from "../constants"
+
+const formatExample = command => `\`${ROOT_COMMAND} ${command}\``
 
 // To add commands, either append them to an existing sub group of commands or create a new sub group,
 // and add a new section to HELP_COMMANDS
@@ -7,17 +9,12 @@ const GETTING_STARTED_COMMANDS = [
     {
         subCommand: "help",
         message: "Display this menu",
-        example: ""
+        example: formatExample("help")
     },
     {
-        subCommand: "subscribe",
-        message: "Enroll in Continuous Learning",
-        example: formatExample("subscribe")
-    },
-    {
-        subCommand: "unsubscribe",
-        message: "Disenroll in Continuous Learning",
-        example: formatExample("unsubscribe")
+        subCommand: "list_languages",
+        message: "See list of available languages",
+        example: formatExample("list_languages")
     },
     {
         subCommand: "my_languages",
@@ -26,19 +23,27 @@ const GETTING_STARTED_COMMANDS = [
         example: formatExample("my_languages javascript,python")
     },
     {
-        subCommand: "list_languages",
-        message: "See list of available languages",
-        example: formatExample("list_languages")
-    },
-    {
         subCommand: "status",
-        message: "See your status",
+        message: "Check your language, partner, due date, and exercise for this week.",
         example: formatExample("status")
     },
+    {
+        subCommand: "subscribe",
+        message: "Enroll in Continuous Learning",
+        example: formatExample("subscribe")
+    }
+]
+
+const MISC_COMMANDS = [
     {
         subCommand: "feedback",
         message: "Tell us what you think",
         example: formatExample("feedback Getting there!")
+    },
+    {
+        subCommand: "unsubscribe",
+        message: "Disenroll in Continuous Learning",
+        example: formatExample("unsubscribe")
     }
 ]
 
@@ -46,6 +51,10 @@ const HELP_COMMANDS = [
     {
         section: "Getting Started",
         content: GETTING_STARTED_COMMANDS
+    },
+    {
+        section: "Misc",
+        content: MISC_COMMANDS
     }
 ]
 
@@ -60,7 +69,7 @@ const formatSectionContent = section => {
 const generateBody = () => {
     const body = HELP_COMMANDS.map(({ section, content }) => {
         return `*${section}*\n${formatSectionContent(content)}`
-    }).join("\n")
+    }).join("\n\n")
     return {
         text: body
     }

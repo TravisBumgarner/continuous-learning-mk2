@@ -1,4 +1,5 @@
 import { users } from "../db"
+import { ROOT_COMMAND } from "../constants"
 
 const generateErrorMessage = (error, user_id) => {
     const ERROR_CODES_DICT = {
@@ -12,7 +13,7 @@ const generateErrorMessage = (error, user_id) => {
 const generateBody = async ({ user_id, user_name, team_domain }) => {
     return users
         .create({ user_id, user_name, team_domain })
-        .then(response => `<@${user_id}> has been added.`)
+        .then(response => `Welcome <@${user_id}>, check out \`${ROOT_COMMAND} help\` to get started!`)
         .catch(error => generateErrorMessage(error, user_id))
 }
 
