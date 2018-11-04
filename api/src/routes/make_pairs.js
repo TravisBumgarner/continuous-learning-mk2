@@ -25,22 +25,13 @@ var zip = function(xs) {
     })
 }
 
-const makePairs = () => {
-    return users
-        .getActive()
-        .then(activeUsers => {
-            const activeUserIds = activeUsers.map(user => user.user_id)
-            const pairedUserIds = zip(splitAt(activeUserIds.length / 2, shuffle(activeUserIds)))
-            return pairedUserIds
-        })
-        .then(pairedUserIds => {
-            return pairedUserIds.map(([id_left, id_right]) => pairs.create(id_left, id_right))
-        })
-        .then(result => {
-            console.log(result)
-            return "Pairing done!"
-        })
-        .catch(error => console.log(error))
+const makePairs = async () => {
+    const activeUsers = await users.getActive()
+    const activeUserIds = activeUsers.map(user => user.user_id)
+    const pairedUserIds = zip(splitAt(activeUserIds.length / 2, shuffle(activeUserIds)))
+    const pairPromises = pairedUserIds.map(([id_left, id_right]) => pairs.create(id_left, id_right))
+    await Promise.all(pairPromises)
+    return "Pairing done!"
 }
 
 export default makePairs
