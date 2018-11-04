@@ -2,8 +2,8 @@ import knex from "../knex"
 
 const getActive = () => {
     return knex
-        .select("problem")
-        .from("problems")
+        .select()
+        .from("exercises")
         .where("status", "active")
         .limit(1)
 }

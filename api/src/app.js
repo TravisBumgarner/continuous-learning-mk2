@@ -3,8 +3,6 @@ import bodyParser from "body-parser"
 
 import * as routes from "./routes"
 
-import { endianness } from "os"
-
 const app = express()
 
 app.use(bodyParser())
@@ -20,6 +18,8 @@ app.post("/", (request, response) => {
         routes.unsubscribe(request.body).then(responseBody => response.send(responseBody))
     } else if (text === "list_languages") {
         routes.list_languages(request.body).then(responseBody => response.send(responseBody))
+    } else if (text === "status") {
+        routes.status(request.body).then(responseBody => response.send(responseBody))
     } else {
         response.send("Invalid command. Try running `/pairme help` to see available options.")
     }

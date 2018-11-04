@@ -1,4 +1,5 @@
 import users from "./users"
 import languages from "./languages"
+import exercises from "./exercises"
 
-export { users, languages }
+export { users, languages, exercises }

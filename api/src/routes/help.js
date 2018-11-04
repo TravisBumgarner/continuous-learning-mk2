@@ -29,6 +29,11 @@ const GETTING_STARTED_COMMANDS = [
         subCommand: "list_languages",
         message: "See list of available languages",
         example: formatExample("list_languages")
+    },
+    {
+        subCommand: "status",
+        message: "See your status",
+        example: formatExample("status")
     }
 ]
 
