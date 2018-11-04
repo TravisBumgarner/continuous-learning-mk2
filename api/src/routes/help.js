@@ -34,6 +34,11 @@ const GETTING_STARTED_COMMANDS = [
         subCommand: "status",
         message: "See your status",
         example: formatExample("status")
+    },
+    {
+        subCommand: "feedback",
+        message: "Tell us what you think",
+        example: formatExample("feedback Getting there!")
     }
 ]
 
