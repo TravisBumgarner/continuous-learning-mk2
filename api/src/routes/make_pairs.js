@@ -30,8 +30,10 @@ const makePairs = async () => {
     const activeUsers = await users.getActive()
     const activeUserIds = activeUsers.map(user => user.user_id)
     const pairedUserIds = zip(splitAt(activeUserIds.length / 2, shuffle(activeUserIds)))
-    const pairPromises = pairedUserIds.map(([id_left, id_right]) => pairs.create(id_left, id_right))
-    await Promise.all(pairPromises)
+
+    const pairPromises_1 = pairedUserIds.map(([id_left, id_right]) => pairs.create(id_left, id_right))
+    const pairPromises_2 = pairedUserIds.map(([id_left, id_right]) => pairs.create(id_right, id_left))
+    await Promise.all(pairPromises_1, pairPromises_2)
     return "Pairing done!"
 }
 

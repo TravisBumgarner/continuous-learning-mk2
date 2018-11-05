@@ -1,4 +1,4 @@
-import { exercises } from "../db"
+import { exercises, pairs } from "../db"
 
 const formatAsCode = text => "```" + text + "```"
 
@@ -10,12 +10,11 @@ const generateErrorMessage = (error, user_id) => {
 }
 
 const generateBody = async ({ user_id, user_name, team_domain }) => {
-    return Promise.all([exercises.getActive()])
+    return Promise.all([exercises.getActive(), pairs.getPartner(user_id)])
         .then(responses => {
-            const [exercise] = responses
-            console.log(exercise)
+            const [exercise, partnerId] = responses
             const body = [
-                `This week, you'll be working on *${exercise[0].title}* with *NAME_HERE*`,
+                `This week, you'll be working on *${exercise[0].title}* with <@${partnerId[0].user_id_right}>`,
                 formatAsCode(exercise[0].text)
             ].join("\n")
             console.log(body)
