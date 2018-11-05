@@ -1,14 +1,16 @@
-// Update with your config settings.
+import config from "../config"
+
+const { host, user, password, database } = config.db
 
 module.exports = {
     development: {
         client: "pg",
         version: "7.2",
         connection: {
-            host: "localhost",
-            user: "travisbumgarner",
-            password: "",
-            database: "travisbumgarner"
+            host,
+            user,
+            password,
+            database
         },
         migrations: {
             directory: "./migrations"
