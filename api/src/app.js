@@ -29,7 +29,7 @@ app.post("/", (request, response) => {
     }
 })
 
-app.get("/makePairs", (request, response) => {
+app.get("/make_pairs", (request, response) => {
     routes.make_pairs().then(pairs => response.send(pairs))
 })
 
