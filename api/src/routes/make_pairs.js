@@ -26,6 +26,7 @@ var zip = function(xs) {
 }
 
 const makePairs = async () => {
+    await pairs.remove()
     const activeUsers = await users.getActive()
     const activeUserIds = activeUsers.map(user => user.user_id)
     const pairedUserIds = zip(splitAt(activeUserIds.length / 2, shuffle(activeUserIds)))
