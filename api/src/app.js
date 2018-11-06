@@ -2,6 +2,7 @@ import express from "express"
 import bodyParser from "body-parser"
 const Sentry = require("@sentry/node")
 
+import { errors } from "./db"
 import * as routes from "./routes"
 
 Sentry.init({ dsn: "https://07e183b574e24ba6ac7eb2a668e6736b@sentry.io/1317415" })
@@ -32,7 +33,10 @@ app.post("/", (request, response, next) => {
     } else if (text.startsWith("feedback")) {
         routes.feedback(request.body).then(responseBody => response.send(responseBody))
     } else {
-        response.send("Invalid command. Try running `/pairme help` to see available options.")
+        console.log(request.body)
+        errors
+            .create(request.body)
+            .then(() => response.send("Invalid command. Try running `/pairme help` to see available options."))
     }
 })
 

@@ -65,3 +65,4 @@ node_modules/
 .env
 api/.DS_Store
 api/src/config.js
+.DS_Store
