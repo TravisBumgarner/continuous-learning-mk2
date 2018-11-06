@@ -1,4 +1,4 @@
-export default {
+const config = {
     db: {
         host: "",
         user: "",
@@ -6,3 +6,5 @@ export default {
         database: ""
     }
 }
+
+module.exports = config

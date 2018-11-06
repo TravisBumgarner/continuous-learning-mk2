@@ -1,4 +1,4 @@
-import config from "../config"
+const config = require("../config")
 
 const { host, user, password, database } = config.db
 
