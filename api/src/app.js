@@ -1,13 +1,20 @@
 import express from "express"
 import bodyParser from "body-parser"
+const Sentry = require("@sentry/node")
 
 import * as routes from "./routes"
 
+Sentry.init({ dsn: "https://07e183b574e24ba6ac7eb2a668e6736b@sentry.io/1317415" })
+
 const app = express()
 
-app.use(bodyParser())
+// Sentry must me the first middleware
+app.use(Sentry.Handlers.requestHandler())
 
-app.post("/", (request, response) => {
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+
+app.post("/", (request, response, next) => {
     // For reference, request.body: { command, text, user_id, user_name, channel_name, channel_id, team_domain }
     let { text } = request.body
     text = text.toLowerCase()
@@ -29,10 +36,13 @@ app.post("/", (request, response) => {
     }
 })
 
-app.get("/make_pairs", (request, response) => {
+app.get("/make_pairs", (request, response, next) => {
     routes.make_pairs().then(pairs => response.send(pairs))
 })
 
-app.get("/ok", (request, response) => response.send("Service is running"))
+app.get("/ok", (request, response, next) => response.send("Service is running"))
+
+// The error handler must be before any other error middleware
+app.use(Sentry.Handlers.errorHandler())
 
 export default app
