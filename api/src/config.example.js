@@ -9,6 +9,7 @@ const config = {
         team: "",
         client_id: "",
         scope: "",
+        client_secret: "",
         oauth_token: ""
     }
 }
