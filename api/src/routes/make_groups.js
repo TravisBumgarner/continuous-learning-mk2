@@ -23,15 +23,18 @@ var zip = function(xs) {
 
 const makeGroups = async () => {
     await groups.remove()
+    await users_to_groups.remove()
     const activeUsers = await users.getActive()
     const activeUserIds = activeUsers.map(user => user.user_id)
     const pairedUserIds = zip(splitAt(activeUserIds.length / 2, shuffle(activeUserIds)))
-    const exercise_id = await exercises.getActive()
+    const exercise = await exercises.getActive()
+    const exercise_id = exercise[0].exercise_id
 
     pairedUserIds.map(async ([user_id_1, user_id_2]) => {
         const group_id = await groups.create(exercise_id)
-        await users_to_groups.create(user_id_1, group_id)
-        await users_to_groups.create(user_id_2, group_id)
+
+        await users_to_groups.create(user_id_1, group_id[0])
+        await users_to_groups.create(user_id_2, group_id[0])
     })
 
     return "Grouping done!"
