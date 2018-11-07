@@ -44,6 +44,10 @@ app.get("/make_pairs", (request, response, next) => {
     routes.make_pairs().then(pairs => response.send(pairs))
 })
 
+app.get("/make_groups", (request, response, next) => {
+    routes.make_groups().then(() => response.send("Groups Made!"))
+})
+
 app.get("/ok", (request, response, next) => response.send("Service is running"))
 
 // The error handler must be before any other error middleware
