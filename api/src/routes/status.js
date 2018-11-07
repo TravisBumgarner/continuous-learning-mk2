@@ -1,4 +1,4 @@
-import { exercises, pairs } from "../db"
+import { exercises, pairs, users } from "../db"
 
 const formatAsCode = text => "```" + text + "```"
 
@@ -9,18 +9,17 @@ const generateErrorMessage = (error, user_id) => {
     return errorMessage ? errorMessage : "An unknown error has occurred."
 }
 
-const generateBody = async ({ user_id, user_name, team_domain }) => {
-    return Promise.all([exercises.getActive(), pairs.getPartner(user_id)])
-        .then(responses => {
-            const [exercise, partnerId] = responses
-            const body = [
-                `This week, you'll be working on *${exercise[0].title}* with <@${partnerId[0].user_id_right}>`,
-                formatAsCode(exercise[0].text)
-            ].join("\n")
-            console.log(body)
-            return body
-        })
-        .catch(error => generateErrorMessage(error, user_id))
+const generateBody = async ({ user_id }) => {
+    const partner = await users.getPartner(user_id)
+    const partner_id = partner[0].user_id
+    const exercise = await exercises.getActive()
+    console.log(exercise)
+    const body = [
+        `This week, you'll be working on *${exercise[0].title}* with <@${partner_id}>`,
+        formatAsCode(exercise[0].text)
+    ].join("\n")
+
+    return body
 }
 
 export default generateBody
