@@ -48,6 +48,11 @@ app.get("/make_groups", (request, response, next) => {
     routes.make_groups().then(() => response.send("Groups Made!"))
 })
 
+app.get("/auth", (request, response, next) => {
+    console.log(request)
+    return response.send("Service is running")
+})
+
 app.get("/ok", (request, response, next) => response.send("Service is running"))
 
 // The error handler must be before any other error middleware
