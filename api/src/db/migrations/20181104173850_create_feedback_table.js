@@ -2,7 +2,7 @@ const TABLE_NAME = "feedback"
 
 exports.up = function(knex, Promise) {
     return knex.schema.createTable(TABLE_NAME, table => {
-        table.increments()
+        table.increments("feedback_id")
         table.text("text")
         table.text("user_id")
         table.text("user_name")
