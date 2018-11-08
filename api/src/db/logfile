@@ -1,9 +1,0 @@
-2018-11-07 11:04:44.333 EST [97282] LOG:  listening on IPv4 address "127.0.0.1", port 5432
-2018-11-07 11:04:44.333 EST [97282] LOG:  could not bind IPv6 address "::1": Address already in use
-2018-11-07 11:04:44.333 EST [97282] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
-2018-11-07 11:04:44.335 EST [97282] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
-2018-11-07 11:04:44.351 EST [97283] LOG:  database system was shut down at 2018-11-07 11:04:35 EST
-2018-11-07 11:04:44.357 EST [97282] LOG:  database system is ready to accept connections
-2018-11-07 11:05:01.393 EST [97330] FATAL:  database "travis-bumgarner" does not exist
-2018-11-07 11:05:41.491 EST [97432] FATAL:  role "travisbumgarner" does not exist
-2018-11-07 11:12:20.382 EST [97956] FATAL:  database "travis-bumgarner" does not exist
