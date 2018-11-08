@@ -53,27 +53,6 @@ app.get("/make_groups", (request, response, next) => {
     routes.make_groups().then(() => response.send("Groups Made!"))
 })
 
-app.get("/auth", async (request, response, next) => {
-    // Authorization codes may only be exchanged once and expire 10 minutes after issuance.
-    const { code, state } = request.query
-
-    console.log(request.query)
-
-    const axiosResponse = await axios({
-        url: "https://slack.com/api/oauth.access",
-        method: "get",
-        params: {
-            client_id: config.slack.client_id,
-            client_secret: config.slack.client_secret,
-            code
-        }
-    })
-
-    const { ok, access_token, scope, user_id, team_name, team_id, incoming_webhook } = axiosResponse
-
-    response.send("Good!")
-})
-
 app.get("/ok", (request, response, next) => response.send("Service is running"))
 
 // The error handler must be before any other error middleware
