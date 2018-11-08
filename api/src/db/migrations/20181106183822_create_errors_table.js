@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
         table.text("user_name")
         table.text("text")
         table.text("command")
+        table.text("error")
         table.timestamp("created_at").defaultTo(knex.fn.now())
     })
 }

@@ -10,7 +10,8 @@ const config = {
         client_id: "",
         scope: "",
         client_secret: "",
-        oauth_token: ""
+        oauth_token: "",
+        signing_secret: ""
     }
 }
 

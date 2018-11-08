@@ -3,6 +3,7 @@ import express from "express"
 import bodyParser from "body-parser"
 // const Sentry = require("@sentry/node")
 
+import * as middleware from "./middleware"
 import { errors } from "./db"
 import * as routes from "./routes"
 import config from "./config"
@@ -17,6 +18,8 @@ const app = express()
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+
+app.use(middleware.validateSlackRequest)
 
 app.post("/", (request, response, next) => {
     // For reference, request.body: { command, text, user_id, user_name, channel_name, channel_id, team_domain }
@@ -36,7 +39,6 @@ app.post("/", (request, response, next) => {
     } else if (text.startsWith("feedback")) {
         routes.feedback(request.body).then(responseBody => response.send(responseBody))
     } else {
-        console.log(request.body)
         errors
             .create(request.body)
             .then(() => response.send("Invalid command. Try running `/pairme help` to see available options."))
