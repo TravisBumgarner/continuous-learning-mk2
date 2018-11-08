@@ -45,10 +45,6 @@ app.post("/", (request, response, next) => {
     }
 })
 
-app.get("/make_pairs", (request, response, next) => {
-    routes.make_pairs().then(pairs => response.send(pairs))
-})
-
 app.get("/make_groups", (request, response, next) => {
     routes.make_groups().then(() => response.send("Groups Made!"))
 })
