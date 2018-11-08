@@ -15,8 +15,11 @@ Currently not being used.
 1. Clone repo
 2. Install dependencies and install knex globally `npm i -g knex`
 3. In `src/` copy `config.example.js` to `config.js` and fill in credentials
-4. In `src/db` run `knex migrate:latest` and `knex seed:run`
-5. Launch server from the root `api/` directory with `npm run start:dev`
+    1. For `slack` click [here](https://api.slack.com/apps/) and all the keys are under `Basic Information` or `OAuth & Permissions`
+    2. For `db` create a local Postgres db and copy the credentials over.
+4. Install knex globally `npm i -g knex`
+5. In `src/db` run `knex migrate:latest` and `knex seed:run`
+6. Launch server from the root `api/` directory with `npm run start:dev`
 
 ### Working with Slack
 
