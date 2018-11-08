@@ -46,7 +46,7 @@ app.post("/", (request, response, next) => {
 })
 
 app.get("/make_groups", (request, response, next) => {
-    routes.make_groups().then(() => response.send("Groups Made!"))
+    routes.make_groups().then(message => response.send(message))
 })
 
 app.get("/ok", (request, response, next) => response.send("Service is running"))

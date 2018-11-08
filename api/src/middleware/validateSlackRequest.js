@@ -5,13 +5,25 @@ import { errors } from "../db"
 import config from "../config"
 
 const validateSlackRequest = (request, response, next) => {
+    console.log(request.url)
+    if (config.whiteListUrls.includes(request.url)) {
+        // TODO Hello Security Vulnerability. This should be deleted.
+        return next()
+    }
+
     const slackSignature = request.headers["x-slack-signature"]
     const requestBody = qs.stringify(request.body, { format: "RFC1738" })
     const timestamp = request.headers["x-slack-request-timestamp"]
 
+    if (typeof slackSignature === "undefined") {
+        return errors
+            .create({ ...request.body, error: "slackSignature was missing" })
+            .then(() => response.status(400).send("Invalid request"))
+    }
+
     const time = Math.floor(new Date().getTime() / 1000)
     if (Math.abs(time - timestamp) > 300) {
-        errors
+        return errors
             .create({ ...request.body, error: "Validation Time Wrong" })
             .then(() => response.status(400).send("Invalid request"))
         return
@@ -28,10 +40,9 @@ const validateSlackRequest = (request, response, next) => {
             .update(sigBasestring, "utf8")
             .digest("hex")
 
-    if (crypto.timingSafeEqual(Buffer.from(mySignature, "utf8"), Buffer.from(slackSignature, "utf8"))) {
-        next()
+    if (crypto.timingSafeEqual(new Buffer.from(mySignature, "utf8"), new Buffer.from(slackSignature, "utf8"))) {
     } else {
-        errors
+        return errors
             .create({ ...request.body, error: "Validation Failed" })
             .then(() => response.status(400).send("Invalid Request"))
     }

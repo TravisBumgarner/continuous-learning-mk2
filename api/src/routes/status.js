@@ -1,4 +1,4 @@
-import { exercises, pairs, users } from "../db"
+import { exercises, users } from "../db"
 
 const formatAsCode = text => "```" + text + "```"
 
