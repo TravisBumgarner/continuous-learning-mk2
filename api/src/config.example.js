@@ -1,4 +1,5 @@
 const config = {
+    whiteListUrls: [],
     db: {
         host: "",
         user: "",
