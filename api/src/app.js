@@ -3,6 +3,7 @@ import express from "express"
 import bodyParser from "body-parser"
 // const Sentry = require("@sentry/node")
 
+import auth from "./auth/index"
 import * as middleware from "./middleware"
 import { errors } from "./db"
 import * as routes from "./routes"
@@ -19,7 +20,7 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-app.use(middleware.validateSlackRequest)
+// app.use(middleware.validateSlackRequest)
 
 app.post("/", (request, response, next) => {
     // For reference, request.body: { command, text, user_id, user_name, channel_name, channel_id, team_domain }
@@ -28,6 +29,8 @@ app.post("/", (request, response, next) => {
 
     if (text === "" || text === "help") {
         response.send(routes.help())
+    } else if (text === "test2") {
+        response.send(auth.makeAuthUrl())
     } else if (text === "subscribe") {
         routes.subscribe(request.body).then(responseBody => response.send(responseBody))
     } else if (text === "unsubscribe") {
@@ -47,6 +50,27 @@ app.post("/", (request, response, next) => {
 
 app.get("/make_groups", (request, response, next) => {
     routes.make_groups().then(message => response.send(message))
+})
+
+app.get("/auth", async (request, response, next) => {
+    console.log("headsd")
+    // Authorization codes may only be exchanged once and expire 10 minutes after issuance.
+    const { code, state } = request.query
+    console.log("code", code)
+    const axiosResponse = await axios({
+        url: "https://slack.com/api/oauth.access",
+        method: "get",
+        params: {
+            client_id: config.slack.client_id,
+            client_secret: config.slack.client_secret,
+            code
+        }
+    })
+    console.log(axiosResponse)
+
+    const { ok, access_token, scope, user_id, team_name, team_id, incoming_webhook } = axiosResponse.data
+    console.log(axiosResponse.data)
+    response.send("All set! You can close this window.")
 })
 
 app.get("/ok", (request, response, next) => response.send("Service is running"))

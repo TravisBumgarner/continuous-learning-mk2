@@ -41,6 +41,7 @@ const validateSlackRequest = (request, response, next) => {
             .digest("hex")
 
     if (crypto.timingSafeEqual(new Buffer.from(mySignature, "utf8"), new Buffer.from(slackSignature, "utf8"))) {
+        return next()
     } else {
         return errors
             .create({ ...request.body, error: "Validation Failed" })
