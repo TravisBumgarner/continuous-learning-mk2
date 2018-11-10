@@ -10,7 +10,7 @@ import config from "./config"
 
 const app = express()
 
-if (process.env.NODE_ENV) {
+if (process.env.NODE_ENV === "production") {
     Sentry.init({ dsn: "https://07e183b574e24ba6ac7eb2a668e6736b@sentry.io/1317415" })
     // Sentry must me the first middleware
     app.use(Sentry.Handlers.requestHandler())
@@ -32,28 +32,13 @@ app.get("/make_groups", (request, response, next) => {
 })
 
 app.get("/auth", async (request, response, next) => {
-    // Authorization codes may only be exchanged once and expire 10 minutes after issuance.
-    const { code, state } = request.query
-    const axiosResponse = await axios({
-        url: "https://slack.com/api/oauth.access",
-        method: "get",
-        params: {
-            client_id: config.slack.client_id,
-            client_secret: config.slack.client_secret,
-            code
-        }
-    })
-
-    const { ok, access_token, scope, user_id, team_name, team_id, incoming_webhook } = axiosResponse.data
-
-    users.create({ user_id, team_id, team_name, access_token, scope }).then(() => {
-        response.send("All set! You can close this window.")
-    })
+    const responseBody = await routes.auth(request)
+    response.send(responseBody)
 })
 
 app.get("/ok", (request, response, next) => response.send("Service is running"))
 
-if (process.env.NODE_ENV) {
+if (process.env.NODE_ENV === "production") {
     // The error handler must be before any other error middleware
     app.use(Sentry.Handlers.errorHandler())
 }

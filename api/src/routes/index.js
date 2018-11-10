@@ -6,5 +6,6 @@ import status from "./status"
 import feedback from "./feedback"
 import make_groups from "./make_groups"
 import errors from "./errors"
+import auth from "./auth"
 
-export { help, register, unsubscribe, list_languages, status, feedback, make_groups, errors }
+export { help, register, unsubscribe, list_languages, status, feedback, make_groups, errors, auth }
