@@ -3,7 +3,7 @@ import express from "express"
 import bodyParser from "body-parser"
 // const Sentry = require("@sentry/node")
 
-import auth from "./auth/index"
+import { makeUrl, sendUserMessage } from "./utilities"
 import * as middleware from "./middleware"
 import { errors, users } from "./db"
 import * as routes from "./routes"
@@ -27,31 +27,10 @@ app.post("/", (request, response, next) => {
     let { text } = request.body
     text = text.toLowerCase()
 
-    if (text === "test_auth") {
-        users.getById(request.body.user_id).then(user => {
-            const { user_id, access_token } = user[0]
-            const baseUrl = "https://slack.com/api/chat.postMessage?"
-
-            const params = {
-                token: access_token,
-                channel: user_id,
-                text: "hello"
-            }
-            const queryString = Object.keys(params)
-                .map(key => key + "=" + params[key])
-                .join("&")
-            console.log(baseUrl + queryString)
-            return axios.get(baseUrl + queryString)
-        })
-    } else if (text === "" || text === "help") {
+    if (text === "" || text === "help") {
         response.send(routes.help())
     } else if (text === "register") {
-        const authUrl = auth.makeAuthUrl()
-        response.json({
-            text: `<${authUrl}|Click here to get started.>`
-        })
-    } else if (text === "subscribe") {
-        routes.subscribe(request.body).then(responseBody => response.send(responseBody))
+        routes.register(request.body).then(responseBody => response.send(responseBody))
     } else if (text === "unsubscribe") {
         routes.unsubscribe(request.body).then(responseBody => response.send(responseBody))
     } else if (text === "list_languages") {
@@ -61,9 +40,7 @@ app.post("/", (request, response, next) => {
     } else if (text.startsWith("feedback")) {
         routes.feedback(request.body).then(responseBody => response.send(responseBody))
     } else {
-        errors
-            .create(request.body)
-            .then(() => response.send("Invalid command. Try running `/pairme help` to see available options."))
+        routes.errors(request.body).then(responseBody => response.send(responseBody))
     }
 })
 
