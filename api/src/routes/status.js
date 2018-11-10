@@ -11,15 +11,20 @@ const generateErrorMessage = (error, user_id) => {
 
 const generateBody = async ({ user_id }) => {
     const partner = await users.getPartner(user_id)
-    const partner_id = partner[0].user_id
-    const exercise = await exercises.getActive()
-    console.log(exercise)
-    const body = [
-        `This week, you'll be working on *${exercise[0].title}* with <@${partner_id}>`,
-        formatAsCode(exercise[0].text)
-    ].join("\n")
+    let responseBody
 
-    return body
+    if (partner) {
+        const partner_id = partner[0].user_id
+        const exercise = await exercises.getActive()
+        console.log(exercise)
+        responseBody = [
+            `This week, you'll be working on *${exercise[0].title}* with <@${partner_id}>`,
+            formatAsCode(exercise[0].text)
+        ].join("\n")
+    } else {
+        responseBody = "Welcome to Let's Pair, You'll be matched with your first partner next week!"
+    }
+    return responseBody
 }
 
 export default generateBody
