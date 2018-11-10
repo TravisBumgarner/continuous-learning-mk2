@@ -70,9 +70,7 @@ const generateBody = () => {
     const body = HELP_COMMANDS.map(({ section, content }) => {
         return `*${section}*\n${formatSectionContent(content)}`
     }).join("\n\n")
-    return {
-        text: body
-    }
+    return body
 }
 
 export default generateBody
