@@ -12,10 +12,12 @@ const generateErrorMessage = (error, user_id) => {
 
 const generateBody = async ({ user_id }) => {
     const partner = await users.getPartner(user_id)
+    const userExists = await users.getById(user_id).length
+
     let value
     let title
 
-    if (partner) {
+    if (userExists && partner) {
         const partner_id = partner[0].user_id
         const exercise = await exercises.getActive()
 
@@ -36,7 +38,7 @@ const generateBody = async ({ user_id }) => {
                 }
             ]
         }
-    } else {
+    } else if (userExists && !partner) {
         return {
             attachments: [
                 {
@@ -50,20 +52,20 @@ const generateBody = async ({ user_id }) => {
                 }
             ]
         }
-    }
-
-    return {
-        attachments: [
-            {
-                color: ATTACHMENT_COLOR,
-                fields: [
-                    {
-                        title: "Too Fast!",
-                        value: "You'll be matched with your first partner next week!"
-                    }
-                ]
-            }
-        ]
+    } else {
+        return {
+            attachments: [
+                {
+                    color: ATTACHMENT_COLOR,
+                    fields: [
+                        {
+                            title: "Hmmmm...",
+                            value: "Please make an account first."
+                        }
+                    ]
+                }
+            ]
+        }
     }
 }
 
