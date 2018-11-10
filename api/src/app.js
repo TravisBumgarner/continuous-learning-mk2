@@ -4,9 +4,8 @@ import bodyParser from "body-parser"
 const Sentry = require("@sentry/node")
 
 import * as middleware from "./middleware"
-import { users } from "./db"
 import * as routes from "./routes"
-import config from "./config"
+import { VALID_SUB_COMMANDS } from "./constants"
 
 const app = express()
 
@@ -22,7 +21,12 @@ app.use(bodyParser.json())
 app.use(middleware.validateSlackRequest)
 
 app.post("/", async (request, response, next) => {
-    const subCommand = request.body.text.split(" ")[0].toLowerCase()
+    let subCommand = request.body.text.split(" ")[0].toLowerCase()
+
+    if (!VALID_SUB_COMMANDS.includes(subCommand)) {
+        subCommand = "help"
+    }
+
     const responseBody = await routes[subCommand](request.body)
     response.json({ text: responseBody })
 })

@@ -11,26 +11,26 @@ const GETTING_STARTED_COMMANDS = [
         message: "Display this menu",
         example: formatExample("help")
     },
+    // {
+    //     subCommand: "list_languages",
+    //     message: "See list of available languages",
+    //     example: formatExample("list_languages")
+    // },
+    // {
+    //     subCommand: "my_languages",
+    //     message:
+    //         "Specify the languages that you would like to work on, separated by commas. Rerun command to change languages",
+    //     example: formatExample("my_languages javascript,python")
+    // },
     {
-        subCommand: "list_languages",
-        message: "See list of available languages",
-        example: formatExample("list_languages")
-    },
-    {
-        subCommand: "my_languages",
-        message:
-            "Specify the languages that you would like to work on, separated by commas. Rerun command to change languages",
-        example: formatExample("my_languages javascript,python")
+        subCommand: "register",
+        message: "Enroll in Continuous Learning",
+        example: formatExample("register")
     },
     {
         subCommand: "status",
-        message: "Check your language, partner, due date, and exercise for this week.",
+        message: "Check your exercise and partner for this week.",
         example: formatExample("status")
-    },
-    {
-        subCommand: "subscribe",
-        message: "Enroll in Continuous Learning",
-        example: formatExample("subscribe")
     }
 ]
 
