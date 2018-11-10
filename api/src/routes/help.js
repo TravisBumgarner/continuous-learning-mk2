@@ -40,9 +40,9 @@ const MISC_COMMANDS = [
         example: formatCommandExample("feedback Getting there!")
     },
     {
-        subCommand: "unsubscribe",
+        subCommand: "quit",
         message: "Disenroll in Continuous Learning",
-        example: formatCommandExample("unsubscribe")
+        example: formatCommandExample("quit")
     }
 ]
 
