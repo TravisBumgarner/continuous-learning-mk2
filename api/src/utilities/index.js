@@ -1,4 +1,8 @@
+import { ROOT_COMMAND } from "../constants"
+
 import makeUrl from "./makeUrl"
 import sendUserMessage from "./sendUserMessage"
 
-export { makeUrl, sendUserMessage }
+const formatCommandExample = command => `\`${ROOT_COMMAND} ${command}\``
+
+export { makeUrl, sendUserMessage, formatCommandExample }

@@ -26,11 +26,7 @@ const generateBody = async ({ user_id }) => {
                     fields: [
                         {
                             title: "Get Coding!",
-                            value: ""
-                        },
-                        {
-                            title: "Partner",
-                            value: `<@${partner_id}>`
+                            value: `This week, you'll be working with <@${partner_id}> on the problem below. Reach out, pick a time, and get to coding.`
                         },
                         {
                             title: `${exercise[0].title}`,
