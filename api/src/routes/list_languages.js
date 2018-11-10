@@ -1,20 +1,9 @@
 import { languages } from "../db"
 
-const generateErrorMessage = (error, user_id) => {
-    const ERROR_CODES_DICT = {}
-
-    const errorMessage = ERROR_CODES_DICT[error.code]
-    return errorMessage ? errorMessage : "An unknown error has occurred."
-}
-
 const generateBody = async ({ user_id, user_name, team_domain }) => {
-    return languages
-        .getActive()
-        .then(response => {
-            const availableLanguages = response.map(row => row.language).join(", ")
-            return `Available languages are ${availableLanguages}`
-        })
-        .catch(error => generateErrorMessage(error, user_id))
+    const response = await languages.getActive()
+    const availableLanguages = response.map(row => row.language).join(", ")
+    return `Available languages are ${availableLanguages}`
 }
 
 export default generateBody
