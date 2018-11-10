@@ -6,6 +6,10 @@ const getPartner = async user_id => {
         .from("users_to_groups")
         .where("user_id", user_id)
 
+    if (!group.length) {
+        return null
+    }
+
     const group_id = group[0].group_id
 
     const partner_id = await knex

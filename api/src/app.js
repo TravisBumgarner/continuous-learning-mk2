@@ -1,57 +1,50 @@
 import axios from "axios"
 import express from "express"
 import bodyParser from "body-parser"
-// const Sentry = require("@sentry/node")
+const Sentry = require("@sentry/node")
 
 import * as middleware from "./middleware"
-import { errors } from "./db"
 import * as routes from "./routes"
-import config from "./config"
-import { access } from "fs"
-
-// Sentry.init({ dsn: "https://07e183b574e24ba6ac7eb2a668e6736b@sentry.io/1317415" })
+import { VALID_SUB_COMMANDS } from "./constants"
 
 const app = express()
 
-// Sentry must me the first middleware
-// app.use(Sentry.Handlers.requestHandler())
+if (process.env.NODE_ENV === "production") {
+    Sentry.init({ dsn: "https://07e183b574e24ba6ac7eb2a668e6736b@sentry.io/1317415" })
+    // Sentry must me the first middleware
+    app.use(Sentry.Handlers.requestHandler())
+}
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 app.use(middleware.validateSlackRequest)
 
-app.post("/", (request, response, next) => {
-    // For reference, request.body: { command, text, user_id, user_name, channel_name, channel_id, team_domain }
-    let { text } = request.body
-    text = text.toLowerCase()
+app.post("/", async (request, response, next) => {
+    let subCommand = request.body.text.split(" ")[0].toLowerCase()
 
-    if (text === "" || text === "help") {
-        response.send(routes.help())
-    } else if (text === "subscribe") {
-        routes.subscribe(request.body).then(responseBody => response.send(responseBody))
-    } else if (text === "unsubscribe") {
-        routes.unsubscribe(request.body).then(responseBody => response.send(responseBody))
-    } else if (text === "list_languages") {
-        routes.list_languages(request.body).then(responseBody => response.send(responseBody))
-    } else if (text === "status") {
-        routes.status(request.body).then(responseBody => response.send(responseBody))
-    } else if (text.startsWith("feedback")) {
-        routes.feedback(request.body).then(responseBody => response.send(responseBody))
-    } else {
-        errors
-            .create(request.body)
-            .then(() => response.send("Invalid command. Try running `/pairme help` to see available options."))
+    if (!VALID_SUB_COMMANDS.includes(subCommand)) {
+        subCommand = "help"
     }
+
+    const responseBody = await routes[subCommand](request.body)
+    response.json(responseBody)
 })
 
 app.get("/make_groups", (request, response, next) => {
     routes.make_groups().then(message => response.send(message))
 })
 
+app.get("/auth", async (request, response, next) => {
+    const responseBody = await routes.auth(request)
+    response.send(responseBody)
+})
+
 app.get("/ok", (request, response, next) => response.send("Service is running"))
 
-// The error handler must be before any other error middleware
-// app.use(Sentry.Handlers.errorHandler())
+if (process.env.NODE_ENV === "production") {
+    // The error handler must be before any other error middleware
+    app.use(Sentry.Handlers.errorHandler())
+}
 
 export default app

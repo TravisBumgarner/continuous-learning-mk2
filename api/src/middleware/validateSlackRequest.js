@@ -5,8 +5,7 @@ import { errors } from "../db"
 import config from "../config"
 
 const validateSlackRequest = (request, response, next) => {
-    console.log(request.url)
-    if (config.whiteListUrls.includes(request.url)) {
+    if (config.whiteListUrls.includes(request._parsedUrl.pathname)) {
         // TODO Hello Security Vulnerability. This should be deleted.
         return next()
     }
@@ -41,6 +40,7 @@ const validateSlackRequest = (request, response, next) => {
             .digest("hex")
 
     if (crypto.timingSafeEqual(new Buffer.from(mySignature, "utf8"), new Buffer.from(slackSignature, "utf8"))) {
+        return next()
     } else {
         return errors
             .create({ ...request.body, error: "Validation Failed" })

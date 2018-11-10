@@ -1,4 +1,5 @@
-import { knex, users, groups, users_to_groups, exercises } from "../db"
+import { users, groups, users_to_groups, exercises } from "../db"
+import { sendUserMessage, formatCommandExample } from "../utilities"
 
 // Below code came from the internet, doesn't work for odd numbers of users.
 var splitAt = function(i, xs) {
@@ -42,7 +43,8 @@ const makeGroups = async () => {
 
     pairedUserIds.map(async ([user_id_1, user_id_2]) => {
         const group_id = await groups.create(exercise_id)
-
+        await sendUserMessage(user_id_1, `New pairings are out, Check ${formatCommandExample("status")} for more info!`)
+        await sendUserMessage(user_id_2, `New pairings are out, Check ${formatCommandExample("status")} for more info!`)
         await users_to_groups.create(user_id_1, group_id[0])
         await users_to_groups.create(user_id_2, group_id[0])
     })
