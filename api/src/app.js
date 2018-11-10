@@ -29,8 +29,11 @@ app.post("/", (request, response, next) => {
 
     if (text === "" || text === "help") {
         response.send(routes.help())
-    } else if (text === "test2") {
-        response.send(auth.makeAuthUrl())
+    } else if (text === "register") {
+        const authUrl = auth.makeAuthUrl()
+        response.json({
+            text: `<${authUrl}|Click here to get started.>`
+        })
     } else if (text === "subscribe") {
         routes.subscribe(request.body).then(responseBody => response.send(responseBody))
     } else if (text === "unsubscribe") {
