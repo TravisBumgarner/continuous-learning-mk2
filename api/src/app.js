@@ -5,7 +5,7 @@ import bodyParser from "body-parser"
 
 import auth from "./auth/index"
 import * as middleware from "./middleware"
-import { errors } from "./db"
+import { errors, users } from "./db"
 import * as routes from "./routes"
 import config from "./config"
 import { access } from "fs"
@@ -73,7 +73,10 @@ app.get("/auth", async (request, response, next) => {
 
     const { ok, access_token, scope, user_id, team_name, team_id, incoming_webhook } = axiosResponse.data
     console.log(axiosResponse.data)
-    response.send("All set! You can close this window.")
+
+    users.create({ user_id, team_id, team_name, access_token, scope }).then(() => {
+        response.send("All set! You can close this window.")
+    })
 })
 
 app.get("/ok", (request, response, next) => response.send("Service is running"))
