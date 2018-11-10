@@ -1,5 +1,5 @@
 import { users } from "../db"
-import { ROOT_COMMAND } from "../constants"
+import { ROOT_COMMAND, ATTACHMENT_COLOR } from "../constants"
 import { makeUrl } from "../utilities"
 import axios from "axios"
 
@@ -14,14 +14,26 @@ const generateErrorMessage = (error, user_id) => {
     return errorMessage ? errorMessage : "An unknown error has occurred."
 }
 
-const generateBody = async req => {
+const generateBody = async () => {
     const url = makeUrl("https://slack.com/oauth/authorize", {
         client_id: config.slack.client_id,
         scope: config.slack.scope,
         team: config.slack.team
     })
 
-    return `<${url}|Click here to get started.>`
+    return {
+        attachments: [
+            {
+                color: ATTACHMENT_COLOR,
+                fields: [
+                    {
+                        title: "Register with Let's Pair",
+                        value: `<${url}|Click here to get started.>`
+                    }
+                ]
+            }
+        ]
+    }
 }
 
 export default generateBody
