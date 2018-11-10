@@ -28,7 +28,7 @@ app.post("/", async (request, response, next) => {
     }
 
     const responseBody = await routes[subCommand](request.body)
-    response.json({ text: responseBody })
+    response.json(responseBody)
 })
 
 app.get("/make_groups", (request, response, next) => {

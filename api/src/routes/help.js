@@ -47,17 +47,6 @@ const MISC_COMMANDS = [
     }
 ]
 
-const HELP_COMMANDS = [
-    {
-        section: "Getting Started",
-        content: GETTING_STARTED_COMMANDS
-    },
-    {
-        section: "Misc",
-        content: MISC_COMMANDS
-    }
-]
-
 const formatSectionContent = section => {
     return section
         .map(({ subCommand, message, example }) => {
@@ -67,10 +56,23 @@ const formatSectionContent = section => {
 }
 
 const generateBody = () => {
-    const body = HELP_COMMANDS.map(({ section, content }) => {
-        return `*${section}*\n${formatSectionContent(content)}`
-    }).join("\n\n")
-    return body
+    return {
+        attachments: [
+            {
+                color: "#00FF00",
+                fields: [
+                    {
+                        title: "Getting Started",
+                        value: formatSectionContent(GETTING_STARTED_COMMANDS)
+                    },
+                    {
+                        title: "Misc",
+                        value: formatSectionContent(MISC_COMMANDS)
+                    }
+                ]
+            }
+        ]
+    }
 }
 
 export default generateBody
