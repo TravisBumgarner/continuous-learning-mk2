@@ -23,27 +23,8 @@ app.use(bodyParser.json())
 // app.use(middleware.validateSlackRequest)
 
 app.post("/", async (request, response, next) => {
-    let responseBody
-
-    // For reference, request.body: { command, text, user_id, user_name, channel_name, channel_id, team_domain }
-    let { text } = request.body
-    text = text.toLowerCase()
-
-    if (text === "" || text === "help") {
-        responseBody = await routes.help()
-    } else if (text === "register") {
-        responseBody = await routes.register(request.body)
-    } else if (text === "unsubscribe") {
-        responseBody = await routes.unsubscribe(request.body)
-    } else if (text === "list_languages") {
-        responseBody = await routes.list_languages(request.body)
-    } else if (text === "status") {
-        responseBody = await routes.status(request.body)
-    } else if (text.startsWith("feedback")) {
-        responseBody = await routes.feedback(request.body)
-    } else {
-        responseBody = await routes.errors(request.body)
-    }
+    const subCommand = request.body.text.split(" ")[0].toLowerCase()
+    const responseBody = await routes[subCommand](request.body)
     response.json({ text: responseBody })
 })
 
