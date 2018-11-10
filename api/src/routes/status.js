@@ -1,4 +1,5 @@
 import { exercises, users } from "../db"
+import { ATTACHMENT_COLOR } from "../constants"
 
 const formatAsCode = text => "```" + text + "```"
 
@@ -11,20 +12,63 @@ const generateErrorMessage = (error, user_id) => {
 
 const generateBody = async ({ user_id }) => {
     const partner = await users.getPartner(user_id)
-    let responseBody
+    let value
+    let title
 
     if (partner) {
         const partner_id = partner[0].user_id
         const exercise = await exercises.getActive()
-        console.log(exercise)
-        responseBody = [
-            `This week, you'll be working on *${exercise[0].title}* with <@${partner_id}>`,
-            formatAsCode(exercise[0].text)
-        ].join("\n")
+
+        return {
+            attachments: [
+                {
+                    color: ATTACHMENT_COLOR,
+                    fields: [
+                        {
+                            title: "Get Coding!",
+                            value: ""
+                        },
+                        {
+                            title: "Partner",
+                            value: `<@${partner_id}>`
+                        },
+                        {
+                            title: `${exercise[0].title}`,
+                            value: formatAsCode(exercise[0].text)
+                        }
+                    ]
+                }
+            ]
+        }
     } else {
-        responseBody = "Welcome to Let's Pair, You'll be matched with your first partner next week!"
+        return {
+            attachments: [
+                {
+                    color: ATTACHMENT_COLOR,
+                    fields: [
+                        {
+                            title: "Too Fast!",
+                            value: "You'll be matched with your first partner next week!"
+                        }
+                    ]
+                }
+            ]
+        }
     }
-    return responseBody
+
+    return {
+        attachments: [
+            {
+                color: ATTACHMENT_COLOR,
+                fields: [
+                    {
+                        title: "Too Fast!",
+                        value: "You'll be matched with your first partner next week!"
+                    }
+                ]
+            }
+        ]
+    }
 }
 
 export default generateBody

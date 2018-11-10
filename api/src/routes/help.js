@@ -1,4 +1,4 @@
-import { ROOT_COMMAND } from "../constants"
+import { ROOT_COMMAND, ATTACHMENT_COLOR } from "../constants"
 
 const formatExample = command => `\`${ROOT_COMMAND} ${command}\``
 
@@ -59,7 +59,7 @@ const generateBody = () => {
     return {
         attachments: [
             {
-                color: "#00FF00",
+                color: ATTACHMENT_COLOR,
                 fields: [
                     {
                         title: "Getting Started",
