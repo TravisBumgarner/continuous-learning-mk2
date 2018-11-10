@@ -17,7 +17,9 @@ const generateBody = async ({ user_id }) => {
                 fields: [
                     {
                         title: wasDeleted ? "We're sad to see you go :(" : "Error",
-                        value: wasDeleted ? `<@${user_id}> has been removed.` : `<@${user_id}> does not exist.`
+                        value: wasDeleted
+                            ? `<@${user_id}> has been removed. You won't be paired starting next week.`
+                            : `<@${user_id}> does not exist.`
                     }
                 ]
             }
