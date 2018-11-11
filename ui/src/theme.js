@@ -14,7 +14,7 @@ const CONTENT_SPACING = {
 const HEADER_FONT_SIZES = {
     s: '1.4rem',
     m: '1.7rem',
-    l: '2rem'
+    l: '3rem'
 }
 
 const TEXT_FONT_SIZES = {
@@ -62,6 +62,10 @@ const GlobalStyle = createGlobalStyle`
         padding: ${CONTENT_SPACING.l};
         ${MEDIA.desktop`font-size: 16px;`}
         ${MEDIA.tablet`font-size: 14px;`}
+    }
+    a {
+        color: #ffffff;
+        font-weight: 700;
     }
 `
 
