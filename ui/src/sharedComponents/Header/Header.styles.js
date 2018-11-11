@@ -4,7 +4,7 @@ import { FONT_FAMILY_HEADER, CONTENT_SPACING, HEADER_FONT_SIZES } from 'theme'
 
 const sharedStyles = props => css`
     font-family: ${FONT_FAMILY_HEADER};
-    color: #00fbff;
+    color: #ffffff;
 `
 
 const LargeHeader = styled.h1`

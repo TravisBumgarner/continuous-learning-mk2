@@ -30,8 +30,8 @@ const ICON_FONT_SIZES = {
     ...HEADER_FONT_SIZES
 }
 
-const FONT_FAMILY_HEADER = "'IBM Plex Sans', sans-serif"
-const FONT_FAMILY_TEXT = "'IBM Plex Sans', sans-serif"
+const FONT_FAMILY_HEADER = "'IBM Plex Mono', monospace"
+const FONT_FAMILY_TEXT = "'IBM Plex Mono', monospace"
 
 const FONT_SIZE_INPUTS_AND_BUTTONS = 14
 
@@ -66,6 +66,8 @@ const GlobalStyle = createGlobalStyle`
     a {
         color: #ffffff;
         font-weight: 100;
+        text-decoration: none;
+        text-transform: uppercase;
         &:hover{
             color: #FFB266
         }
