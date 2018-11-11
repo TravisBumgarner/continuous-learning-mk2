@@ -2,15 +2,15 @@ import React from 'react'
 
 import { Header, Text } from 'sharedComponents'
 
-import { WelcomeWrapper } from './Error500.styles'
+import { Error500Wrapper } from './Error500.styles'
 
-const Welcome = () => {
+const Error500 = () => {
     return (
-        <WelcomeWrapper>
+        <Error500Wrapper>
             <Header size="medium">Hmmmm</Header>
             <Text>It looks like something went wrong with your request. Please try again later.</Text>
-        </WelcomeWrapper>
+        </Error500Wrapper>
     )
 }
 
-export default Welcome
+export default Error500

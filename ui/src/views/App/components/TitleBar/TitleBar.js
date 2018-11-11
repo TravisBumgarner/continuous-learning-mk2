@@ -9,7 +9,7 @@ const TitleBar = () => {
     console.log(TitleBarWrapper)
     return (
         <TitleBarWrapper>
-            <Header size="large">Let's Chat</Header>
+            <Header size="large">Let's Pair</Header>
             <a href="https://github.com/TravisBumgarner/lets-pair" target="_blank">
                 <GithubIcon size={HEADER_FONT_SIZES.l} />
             </a>

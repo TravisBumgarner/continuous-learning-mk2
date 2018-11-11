@@ -17,8 +17,8 @@ class App extends Component {
                     <BrowserRouter>
                         <Switch>
                             <Route path="/welcome" component={Welcome} />
-                            <Route path="/" component={Welcome} />
                             <Route path="/error500" component={Error500} />
+                            <Route exact path="/" component={Welcome} />
                         </Switch>
                     </BrowserRouter>
                 </AppWrapper>
