@@ -6,6 +6,7 @@ const Sentry = require("@sentry/node")
 import * as middleware from "./middleware"
 import * as routes from "./routes"
 import { VALID_SUB_COMMANDS } from "./constants"
+import { logger } from "./utilities"
 
 const app = express()
 
@@ -23,6 +24,7 @@ app.use(middleware.validateSlackRequest)
 app.post("/", async (request, response, next) => {
     let subCommand = request.body.text.split(" ")[0].toLowerCase()
 
+    logger({ request: request.body, type: logger.types.log, route: "/", message: "slash command" })
     if (!VALID_SUB_COMMANDS.includes(subCommand)) {
         subCommand = "help"
     }

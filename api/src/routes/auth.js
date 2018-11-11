@@ -3,6 +3,7 @@ import axios from "axios"
 
 import config from "../config"
 import { users } from "../db"
+import { logger } from "../utilities"
 
 const generateBody = async ({ query }) => {
     const { code, state } = query
@@ -18,7 +19,6 @@ const generateBody = async ({ query }) => {
                 code
             }
         })
-
         if (axiosResponse.data.ok) {
             const { access_token, scope, user_id, team_name, team_id } = axiosResponse.data
             const user = await users.getById(user_id)
@@ -29,11 +29,21 @@ const generateBody = async ({ query }) => {
                 responseBody = "All set! You can close this window."
             }
         } else {
-            // console.log(axiosResponse)
+            logger({
+                request: axiosResponse.data,
+                route: "/auth",
+                type: logger.types.invalidAuth,
+                message: "auth.js failure"
+            })
             responseBody = "An error has occured, please try again later."
         }
     } catch (error) {
-        // console.log(error)
+        logger({
+            request: axiosResponse.data,
+            route: "/auth",
+            type: logger.types.invalidAuth,
+            message: "auth.js failure"
+        })
         responseBody = "An error has occured, please try again later."
     }
     return responseBody

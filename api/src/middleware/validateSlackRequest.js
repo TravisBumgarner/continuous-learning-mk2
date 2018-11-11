@@ -1,7 +1,7 @@
 import crypto from "crypto"
 import qs from "qs"
 
-import { errors } from "../db"
+import { logger } from "../utilities"
 import config from "../config"
 
 const validateSlackRequest = (request, response, next) => {
@@ -15,17 +15,22 @@ const validateSlackRequest = (request, response, next) => {
     const timestamp = request.headers["x-slack-request-timestamp"]
 
     if (typeof slackSignature === "undefined") {
-        return errors
-            .create({ ...request.body, error: "slackSignature was missing" })
-            .then(() => response.status(400).send("Invalid request"))
+        logger({
+            request: request,
+            type: logger.types.error,
+            message: "slackSignature was missing"
+        })
+        response.redirect("https://letspair.online/error500")
     }
 
     const time = Math.floor(new Date().getTime() / 1000)
     if (Math.abs(time - timestamp) > 300) {
-        return errors
-            .create({ ...request.body, error: "Validation Time Wrong" })
-            .then(() => response.status(400).send("Invalid request"))
-        return
+        logger({
+            request: request,
+            type: logger.types.error,
+            message: "timestamp time was wrong"
+        })
+        response.redirect("https://letspair.online/error500")
     }
 
     const sigBasestring = "v0:" + timestamp + ":" + requestBody
@@ -42,9 +47,12 @@ const validateSlackRequest = (request, response, next) => {
     if (crypto.timingSafeEqual(new Buffer.from(mySignature, "utf8"), new Buffer.from(slackSignature, "utf8"))) {
         return next()
     } else {
-        return errors
-            .create({ ...request.body, error: "Validation Failed" })
-            .then(() => response.status(400).send("Invalid Request"))
+        logger({
+            request: request,
+            type: logger.types.error,
+            message: "Validation Failed"
+        })
+        response.redirect("https://letspair.online/error500")
     }
 }
 

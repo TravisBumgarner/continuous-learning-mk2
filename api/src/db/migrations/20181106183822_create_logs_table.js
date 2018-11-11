@@ -1,13 +1,12 @@
-const TABLE_NAME = "errors"
+const TABLE_NAME = "logs"
 
 exports.up = function(knex, Promise) {
     return knex.schema.createTable(TABLE_NAME, table => {
-        table.increments("error_id")
-        table.text("user_id")
-        table.text("user_name")
-        table.text("text")
-        table.text("command")
-        table.text("error")
+        table.increments("log_id")
+        table.text("type")
+        table.text("message")
+        table.text("route")
+        table.text("request")
         table.timestamp("created_at").defaultTo(knex.fn.now())
     })
 }
