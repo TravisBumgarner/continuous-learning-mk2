@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import { CONTENT_SPACING } from 'theme'
 
@@ -9,7 +10,7 @@ const NavigationWrapper = styled.div`
     padding: ${CONTENT_SPACING.l} 0;
 `
 
-const NavigationLink = styled.a`
+const NavigationLink = styled(Link)`
     margin-right: ${CONTENT_SPACING.l};
 `
 

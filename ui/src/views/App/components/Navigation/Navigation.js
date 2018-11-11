@@ -8,27 +8,31 @@ import { NavigationWrapper, NavigationLink } from './Navigation.styles'
 const LINKS_CONTENT = [
     {
         text: 'Home',
-        href: '/'
+        to: '/'
     },
     {
         text: 'Contribute',
-        href: '/contribute'
+        to: '/contribute'
     },
     {
-        text: 'Getting Started',
-        href: '/getting_started'
+        text: 'Introduction',
+        to: '/introduction'
     },
     {
         text: 'About',
-        href: '/about'
+        to: '/about'
     },
     {
         text: 'Contact',
-        href: '/contact'
+        to: '/contact'
     }
 ]
 
-const Links = LINKS_CONTENT.map(l => <NavigationLink href={l.href}>{l.text}</NavigationLink>)
+const Links = LINKS_CONTENT.map(l => (
+    <NavigationLink key={l.text} to={l.to}>
+        {l.text}
+    </NavigationLink>
+))
 
 const Navigation = () => {
     return <NavigationWrapper>{Links}</NavigationWrapper>
