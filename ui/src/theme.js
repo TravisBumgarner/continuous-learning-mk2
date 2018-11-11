@@ -30,8 +30,8 @@ const ICON_FONT_SIZES = {
     ...HEADER_FONT_SIZES
 }
 
-const FONT_FAMILY_HEADER = "'Raleway', sans-serif;"
-const FONT_FAMILY_TEXT = "'Montserrat', sans-serif"
+const FONT_FAMILY_HEADER = "'Ubuntu Mono', monospace"
+const FONT_FAMILY_TEXT = "'Ubuntu Mono', monospace"
 
 const FONT_SIZE_INPUTS_AND_BUTTONS = 14
 
@@ -55,7 +55,10 @@ const PAGE_THEME = styled.div``
 
 const GlobalStyle = createGlobalStyle`
     html {
+        background-color: #6666ff;
+        color: #ffffff;
         font-size: 18px;
+        font-family: ${FONT_FAMILY_HEADER};
         padding: ${CONTENT_SPACING.l};
         ${MEDIA.desktop`font-size: 16px;`}
         ${MEDIA.tablet`font-size: 14px;`}
