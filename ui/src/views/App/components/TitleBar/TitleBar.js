@@ -6,7 +6,7 @@ import { Header } from 'sharedComponents'
 import { TitleBarWrapper, GithubIcon } from './TitleBar.styles'
 
 const TitleBar = () => {
-    console.log(TitleBarWrapper)
+
     return (
         <TitleBarWrapper>
             <Header size="large">Let's Pair</Header>

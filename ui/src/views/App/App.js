@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { GlobalStyle } from 'theme'
 import { Welcome, Error500, Error404 } from 'views'
 
-import { TitleBar } from './components'
+import { TitleBar, Navigation } from './components'
 import { AppWrapper } from './App.styles'
 
 class App extends Component {
@@ -14,6 +14,7 @@ class App extends Component {
                 <GlobalStyle />
                 <AppWrapper>
                     <TitleBar />
+                    <Navigation />
                     <BrowserRouter>
                         <Switch>
                             <Route path="/welcome" component={Welcome} />
