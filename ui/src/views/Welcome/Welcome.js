@@ -9,6 +9,9 @@ const Welcome = () => {
         <WelcomeWrapper>
             <Header size="medium">Thanks for Registering!</Header>
             <Header size="small">Next Steps</Header>
+            <Text>Starting next week on Monday morning, you'll receive an invite to pair.</Text>
+            <Header size="small">Contribute</Header>
+            <Text>Check out the GitHub repo linked in the top left corner.</Text>
         </WelcomeWrapper>
     )
 }

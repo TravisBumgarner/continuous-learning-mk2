@@ -37,7 +37,7 @@ app.get("/make_groups", (request, response, next) => {
 
 app.get("/auth", async (request, response, next) => {
     const responseBody = await routes.auth(request)
-    response.send(responseBody)
+    response.redirect("http://letspair.online/welcome")
 })
 
 app.get("/ok", (request, response, next) => response.send("Service is running"))
