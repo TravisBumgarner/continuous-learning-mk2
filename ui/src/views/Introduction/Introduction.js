@@ -5,7 +5,12 @@ import { Header, Text } from 'sharedComponents'
 import { IntroductionWrapper } from './Introduction.styles'
 
 const Introduction = () => {
-    return <IntroductionWrapper>Introduction</IntroductionWrapper>
+    return (
+        <IntroductionWrapper>
+            <Header size="medium">Introduction</Header>
+            <Text>Very much a Work in Progress.</Text>
+        </IntroductionWrapper>
+    )
 }
 
 export default Introduction
