@@ -5,7 +5,8 @@ const formatAsCode = text => "```" + text + "```"
 
 const generateBody = async ({ user_id }) => {
     const partner = await users.getPartner(user_id)
-    const userExists = await users.getById(user_id).length
+    const user = await users.getById(user_id)
+    const userExists = user.length
 
     let value
     let title
