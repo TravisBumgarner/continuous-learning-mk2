@@ -6,8 +6,8 @@ const DefaultText = styled.p`
     color: ${props => (props.inverted ? 'white' : 'black')};
     font-family: ${FONT_FAMILY_TEXT};
     line-height: 1.5;
-    padding-bottom: ${CONTENT_SPACING.m};
-    padding-top: ${CONTENT_SPACING.m};
+    margin-bottom: ${CONTENT_SPACING.m};
+    margin-top: ${CONTENT_SPACING.m};
 
     &:first-child {
         margin: 0;

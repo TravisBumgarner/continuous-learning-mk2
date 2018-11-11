@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-import { Register } from 'views'
-import { AppWrapper } from './App.styles'
 import { GlobalStyle } from 'theme'
+import { Welcome } from 'views'
+
+import { TitleBar } from './components'
+import { AppWrapper } from './App.styles'
 
 class App extends Component {
     render() {
@@ -11,10 +13,11 @@ class App extends Component {
             <Fragment>
                 <GlobalStyle />
                 <AppWrapper>
+                    <TitleBar />
                     <BrowserRouter>
                         <Switch>
-                            <Route path="/" component={Register} />
-                            <Route path="/register" component={Register} />
+                            <Route path="/welcome" component={Welcome} />
+                            <Route path="/" component={Welcome} />
                         </Switch>
                     </BrowserRouter>
                 </AppWrapper>

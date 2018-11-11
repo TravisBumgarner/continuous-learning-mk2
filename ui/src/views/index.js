@@ -1,7 +1,4 @@
 import App from './App/App'
-import Register from './Register/Register'
+import Welcome from './Welcome/Welcome'
 
-export {
-    App,
-    Register
-}
+export { App, Welcome }
