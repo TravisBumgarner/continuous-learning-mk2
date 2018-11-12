@@ -13,7 +13,6 @@ const validateSlackRequest = (request, response, next) => {
     const slackSignature = request.headers["x-slack-signature"]
     const requestBody = qs.stringify(request.body, { format: "RFC1738" })
     const timestamp = request.headers["x-slack-request-timestamp"]
-    console.log(slackSignature)
     if (typeof slackSignature === "undefined") {
         logger({
             request: null,
