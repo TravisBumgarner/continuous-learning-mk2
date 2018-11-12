@@ -13,24 +13,26 @@ const validateSlackRequest = (request, response, next) => {
     const slackSignature = request.headers["x-slack-signature"]
     const requestBody = qs.stringify(request.body, { format: "RFC1738" })
     const timestamp = request.headers["x-slack-request-timestamp"]
-
+    console.log(slackSignature)
     if (typeof slackSignature === "undefined") {
         logger({
-            request: request,
+            request: null,
+            route: "middleware",
             type: logger.types.error,
             message: "slackSignature was missing"
         })
-        response.redirect("https://letspair.online/error500")
+        return response.redirect("https://letspair.online/error500")
     }
 
     const time = Math.floor(new Date().getTime() / 1000)
     if (Math.abs(time - timestamp) > 300) {
         logger({
-            request: request,
+            request: null,
+            route: "middleware",
             type: logger.types.error,
             message: "timestamp time was wrong"
         })
-        response.redirect("https://letspair.online/error500")
+        return response.redirect("https://letspair.online/error500")
     }
 
     const sigBasestring = "v0:" + timestamp + ":" + requestBody
@@ -49,10 +51,11 @@ const validateSlackRequest = (request, response, next) => {
     } else {
         logger({
             request: request,
+            route: "middleware",
             type: logger.types.error,
             message: "Validation Failed"
         })
-        response.redirect("https://letspair.online/error500")
+        return response.redirect("https://letspair.online/error500")
     }
 }
 
