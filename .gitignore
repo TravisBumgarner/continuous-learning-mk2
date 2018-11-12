@@ -67,5 +67,5 @@ node_modules/
 # dotenv environment variables file
 .env
 api/.DS_Store
-api/src/config.js
+config.js
 .DS_Store
