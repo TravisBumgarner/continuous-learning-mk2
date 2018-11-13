@@ -8,7 +8,7 @@ app.get('*', function(request, response) {
     response.sendFile(path.resolve(__dirname, './dist', 'index.html'))
 })
 
-const port = 3001
+const port = 3000
 app.listen(port, () => {
     console.log(`Running on port ${port}`)
 })

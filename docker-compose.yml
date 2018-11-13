@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+    ui:
+        build:
+            context: './ui'
+        ports:
+            - '3000:3000'
+        volumes:
+            - ./ui/src:/app/src
+            - ./ui/.babelrc:/app/.babelrc
+            - ./ui/index.template.ejs:/app/index.template.ejs
+            - ./ui/webpack.js:/app/webpack.js
+            - ./ui/server.js:/app/server.js
