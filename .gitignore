@@ -1,5 +1,6 @@
 # My Stuff
 dist/
+pgdata/
 
 # Logs
 *.log

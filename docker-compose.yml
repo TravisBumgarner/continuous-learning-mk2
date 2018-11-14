@@ -1,6 +1,16 @@
 version: '3'
 
 services:
+    db:
+        image: postgres
+        environment:
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_USER: postgres
+            POSTGRES_DB: postgres
+        volumes:
+            - ./pgdata:/var/lib/postgresql/data
+        ports:
+            - "5433:5432"
     ui:
         build:
             context: './ui'
@@ -13,6 +23,8 @@ services:
             - ./ui/webpack.js:/app/webpack.js
             - ./ui/server.js:/app/server.js
     slack:
+        depends_on:
+            - db
         build:
             context: './slack'
         ports:
