@@ -13,10 +13,10 @@ module.exports = {
             database
         },
         migrations: {
-            directory: "./migrations"
+            directory: "src/db/migrations"
         },
         seeds: {
-            directory: "./seeds"
+            directory: "src/db/seeds"
         }
     }
 }
