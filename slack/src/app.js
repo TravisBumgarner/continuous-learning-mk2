@@ -9,24 +9,24 @@ import { VALID_SUB_COMMANDS } from "./constants"
 import { logger } from "./utilities"
 import knex from "./db/knex"
 
-const makeMigrationsAndSeeds = async () => {
+const migrateLatest = async () => {
     let retries = 5
     while (retries) {
         try {
-            const response = await knex.migrate.latest().then(async () => {
+            await knex.migrate.latest().then(async response => {
+                console.log(response)
                 console.log(`Database connection established`)
-                await knex.seed.run()
-                console.log(`Database seeded`)
             })
             break
         } catch (error) {
+            console.log(error)
             retries -= 1
             console.log(`Database connection retries left ${retries}`)
             await new Promise(res => setTimeout(res, 5000))
         }
     }
 }
-makeMigrationsAndSeeds()
+migrateLatest()
 
 const app = express()
 
