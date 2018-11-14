@@ -1,3 +1,5 @@
+const path = require("path")
+
 const config = require("../config")
 
 const { host, user, password, database } = config.db
@@ -13,10 +15,10 @@ module.exports = {
             database
         },
         migrations: {
-            directory: "src/db/migrations"
+            directory: path.resolve(__dirname, "migrations")
         },
         seeds: {
-            directory: "src/db/seeds"
+            directory: path.resolve(__dirname, "seeds")
         }
     }
 }
