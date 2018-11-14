@@ -34,3 +34,12 @@
 4. Click on `Slash Commands` on the left side and add a new command. (We use `/pairme`)
 5. Fill in the information and paste the ngrok url under `Request Url`
 6. Save and head over to slack. Type in the command entered in step 4 and you should receive a help message back
+
+# Slack - WIP
+
+## Setup
+
+### Seed DB
+
+1. `docker-compose exec slack sh`
+2. `npm run db:seed`
