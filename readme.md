@@ -39,6 +39,16 @@
 
 ## Setup
 
+### Code ### Code
+
+1. Clone repo
+2. Install docker
+3. In `slack/src/` copy `config.example.js` to `config.js` and fill in credentials
+    1. For `slack` click [here](https://api.slack.com/apps/) and all the keys are under `Basic Information` or `OAuth & Permissions`
+    2. For `db` create a local Postgres db and copy the credentials over.
+4. Build `docker-compose build`
+5. Start `docker-compose up`
+
 ### Seed DB
 
 1. `docker-compose exec slack sh`
