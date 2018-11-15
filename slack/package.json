@@ -7,7 +7,9 @@
     "start:dev": "NODE_ENV=development nodemon -r esm index.js",
     "start:prod": "NODE_ENV=production nodemon -r esm index.js",
     "test": "mocha -r esm \"./src/**/*.spec.js\"",
-    "db:seed": "knex seed:run --knexfile ./src/db/knexfile.js"
+    "bootstrap": "../scripts/bootstrap.sh",
+    "db:seed": "knex seed:run --knexfile ./src/db/knexfile.js",
+    "db:migrate": "knex migrate:latest --knexfile ./src/db/knexfile.js"
   },
   "repository": {
     "type": "git",
