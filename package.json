@@ -4,16 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "NODE_ENV=development webpack-dev-server --hot --inline --mode=development --config webpack.js",
-    "bundle": "rm ./dist/index.html; rm ./dist/app*; mkdir ./dist; NODE_ENV=production; webpack --mode=production --config webpack.js",
-    "start:prod": "npm run bundle; node server.js"
+    "frontend:dev": "NODE_ENV=development webpack-dev-server --hot --inline --mode=development --config webpack.js",
+    "frontend:prod": "npm run bundle; node server.js",
+    "server:dev": "NODE_ENV=development nodemon index.js",
+    "bundle": "rm ./dist/index.html; rm ./dist/app*; mkdir ./dist; NODE_ENV=production; webpack --mode=production --config webpack.js"
   },
   "author": "Travis Bumgarner",
   "license": "ISC",
   "dependencies": {
+    "@sentry/node": "^5.0.8",
     "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "esm": "^3.2.22",
     "express": "^4.16.4",
     "html-webpack-plugin": "^3.2.0",
+    "knex": "^0.16.5",
+    "nodemon": "^1.18.11",
+    "pg": "^7.9.0",
+    "qs": "^6.7.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-icons": "^3.5.0",

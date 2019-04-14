@@ -23,7 +23,7 @@ setupEnv()
 module.exports = env => {
     return {
         entry: {
-            app: './src/index.js'
+            app: './src/frontend/index.js'
         },
         output: {
             filename: '[name]-[hash].bundle.js',
@@ -32,13 +32,13 @@ module.exports = env => {
         },
         resolve: {
             alias: {
-                sharedComponents: path.resolve(__dirname, 'src/sharedComponents/'),
-                containers: path.resolve(__dirname, 'src/containers/'),
-                views: path.resolve(__dirname, 'src/views/'),
-                theme: path.resolve(__dirname, 'src/theme.js'),
-                utilities: path.resolve(__dirname, 'src/utilities/'),
-                resources: path.resolve(__dirname, 'src/resources/'),
-                constants: path.resolve(__dirname, 'src/constants/')
+                sharedComponents: path.resolve(__dirname, 'src/frontend/sharedComponents/'),
+                containers: path.resolve(__dirname, 'src/frontend/containers/'),
+                views: path.resolve(__dirname, 'src/frontend/views/'),
+                theme: path.resolve(__dirname, 'src/frontend/theme.js'),
+                utilities: path.resolve(__dirname, 'src/frontend/utilities/'),
+                resources: path.resolve(__dirname, 'src/frontend/resources/'),
+                constants: path.resolve(__dirname, 'src/frontend/constants/')
             }
         },
         module: {
@@ -61,7 +61,7 @@ module.exports = env => {
         },
         plugins: [
             new HtmlWebpackPlugin({
-                template: './index.template.ejs',
+                template: './src/frontend/index.template.ejs',
                 inject: 'body'
             }),
             new webpack.DefinePlugin({ __API__: apiHost })
