@@ -7,7 +7,6 @@ const Sentry = require('@sentry/node')
 
 import * as middleware from './src/server/middleware'
 import * as routes from './src/server/routes'
-import { VALID_SUB_COMMANDS } from './src/server/constants'
 import { logger } from './src/server/utilities'
 
 const router = express.Router()
@@ -24,15 +23,53 @@ router.use(bodyParser.json())
 router.use(middleware.validateSlackRequest)
 
 router.post('/', async (request, response, next) => {
-    let subCommand = request.body.text.split(' ')[0].toLowerCase()
+    // const message = logger({ request: request.body, type: logger.types.log, route: '/', message: 'slash command' })
 
-    logger({ request: request.body, type: logger.types.log, route: '/', message: 'slash command' })
-    if (!VALID_SUB_COMMANDS.includes(subCommand)) {
-        subCommand = 'help'
+    const getSubCommandAndMessage = request => {
+        var split_point = request.body.text.indexOf(' ')
+
+        if (split_point === -1) {
+            return [request.body.text, '']
+        }
+        return [request.body.text.slice(0, split_point), request.body.text.slice(split_point + 1)]
     }
 
-    const responseBody = await routes[subCommand](request.body)
-    response.json(responseBody)
+    const [subCommand, message] = getSubCommandAndMessage(request)
+
+    let jsonBody
+    switch (subCommand) {
+        case '': {
+            jsonBody = await routes.welcome(request.body)
+            break
+        }
+
+        case 'register': {
+            jsonBody = await routes.register(request.body)
+            break
+        }
+
+        case 'feedback': {
+            jsonBody = await routes.feedback(request.body)
+            break
+        }
+
+        case 'quit': {
+            jsonBody = await routes.quit(request.body)
+            break
+        }
+
+        case 'status': {
+            jsonBody = await routes.status(request.body)
+            break
+        }
+        case 'help':
+        default: {
+            jsonBody = await routes.help(request.body)
+            break
+        }
+    }
+
+    response.json(jsonBody)
 })
 
 router.get('/make_groups', (request, response, next) => {
@@ -41,6 +78,7 @@ router.get('/make_groups', (request, response, next) => {
 
 router.get('/auth', async (request, response, next) => {
     const responseBody = await routes.auth(request)
+    console.log(responseBody)
     response.redirect('http://letspair.online/welcome')
 })
 
