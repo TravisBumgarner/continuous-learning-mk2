@@ -77,7 +77,6 @@ const GlobalStyle = createGlobalStyle`
 export {
     MEDIA,
     GlobalStyle,
-    generateTheme,
     PAGE_THEME,
     FONT_FAMILY_TEXT,
     FONT_FAMILY_HEADER,

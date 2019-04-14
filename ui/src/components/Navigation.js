@@ -1,9 +1,20 @@
 import React from 'react'
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
-import { HEADER_FONT_SIZES } from 'theme'
+import { HEADER_FONT_SIZES, CONTENT_SPACING } from 'theme'
 import { Header } from 'sharedComponents'
 
-import { NavigationWrapper, NavigationLink } from './Navigation.styles'
+const NavigationWrapper = styled.div`
+    border-top: ${CONTENT_SPACING.xs} solid #ffffff;
+    border-bottom: ${CONTENT_SPACING.xs} solid #ffffff;
+    margin: ${CONTENT_SPACING.l} 0;
+    padding: ${CONTENT_SPACING.l} 0;
+`
+
+const NavigationLink = styled(Link)`
+    margin-right: ${CONTENT_SPACING.l};
+`
 
 const LINKS_CONTENT = [
     {
@@ -13,18 +24,6 @@ const LINKS_CONTENT = [
     {
         text: 'Contribute',
         to: '/contribute'
-    },
-    {
-        text: 'Introduction',
-        to: '/introduction'
-    },
-    {
-        text: 'About',
-        to: '/about'
-    },
-    {
-        text: 'Contact',
-        to: '/contact'
     }
 ]
 

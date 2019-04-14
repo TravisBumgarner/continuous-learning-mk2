@@ -1,8 +1,10 @@
 import React from 'react'
+import styled from 'styled-components'
 
 import { Header, Text } from 'sharedComponents'
+import { PAGE_THEME } from 'theme'
 
-import { ContributeWrapper } from './Contribute.styles'
+const ContributeWrapper = styled(PAGE_THEME)``
 
 const Contribute = () => {
     return (
