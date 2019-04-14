@@ -19,7 +19,7 @@ const Setup = () => {
                 Type <Code inline>/letspair</Code> in Slack to get registered.
             </Text>
             <Header size="small">Tools</Header>
-            <Text>Use this.</Text>
+            <Text>We recommend using Zoom with screen sharing.</Text>
         </SetupWrapper>
     )
 }

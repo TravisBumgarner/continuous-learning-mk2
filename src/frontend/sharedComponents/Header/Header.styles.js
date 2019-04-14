@@ -1,18 +1,18 @@
 import styled, { css } from 'styled-components'
 
-import { FONT_FAMILY_HEADER, CONTENT_SPACING, HEADER_FONT_SIZES } from 'theme'
+import { FONT_FAMILY_HEADER, CONTENT_SPACING, HEADER_FONT_SIZES, FOREGROUND_COLOR } from 'theme'
 
 const sharedStyles = props => css`
     font-family: ${FONT_FAMILY_HEADER};
-    color: #ffffff;
+    color: ${FOREGROUND_COLOR};
 `
 
 const LargeHeader = styled.h1`
     ${props => sharedStyles(props)};
     text-transform: uppercase;
     font-weight: 700;
-    margin-bottom: ${CONTENT_SPACING.l};
-    margin-top: ${CONTENT_SPACING.l};
+    margin-bottom: ${CONTENT_SPACING.xxl};
+    margin-top: 0;
     font-size: ${HEADER_FONT_SIZES.l};
 `
 
@@ -20,17 +20,17 @@ const MediumHeader = styled.h2`
     ${props => sharedStyles(props)};
     text-transform: uppercase;
     font-weight: 400;
-    margin-bottom: ${CONTENT_SPACING.m};
-    margin-top: ${CONTENT_SPACING.m};
+    margin-bottom: ${CONTENT_SPACING.xl};
+    margin-top: ${CONTENT_SPACING.xl};
     font-size: ${HEADER_FONT_SIZES.m};
 `
 
 const SmallHeader = styled.h3`
     ${props => sharedStyles(props)};
     font-weight: 400;
+    margin-bottom: ${CONTENT_SPACING.l};
+    margin-top: ${CONTENT_SPACING.l};
     font-size: ${HEADER_FONT_SIZES.s};
-    margin-bottom: ${CONTENT_SPACING.s};
-    margin-top: ${CONTENT_SPACING.s};
 `
 
 const InlineHeader = styled.span`

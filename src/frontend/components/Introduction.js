@@ -31,16 +31,12 @@ const questions = [
     }
 ]
 
-const QuestionWrapper = styled.div`
-    margin-bottom: ${CONTENT_SPACING.xl};
-`
-
 const Introduction = () => {
     const Questions = questions.map(({ question, answer }, index) => (
-        <QuestionWrapper key={index}>
+        <>
             <Header size="small">{question}</Header>
             <Text>{answer}</Text>
-        </QuestionWrapper>
+        </>
     ))
 
     return (

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { FaGithub, FaTwitter } from 'react-icons/fa'
 
-import { HEADER_FONT_SIZES, CONTENT_SPACING } from 'theme'
+import { HEADER_FONT_SIZES, CONTENT_SPACING, HOVER_COLOR, BACKGROUND_COLOR, FOREGROUND_COLOR } from 'theme'
 import { Header } from 'sharedComponents'
 
 const TitleBarWrapper = styled.div`
@@ -12,16 +12,22 @@ const TitleBarWrapper = styled.div`
 
 const GithubIcon = styled(FaGithub)`
     margin-bottom: ${CONTENT_SPACING.l};
-    margin-top: ${CONTENT_SPACING.l};
+    margin-top: 0;
     margin-left: ${CONTENT_SPACING.l};
-    fill: #ffffff;
+    fill: ${FOREGROUND_COLOR};
+    &:hover {
+        fill: ${HOVER_COLOR};
+    }
 `
 
 const TwitterIcon = styled(FaTwitter)`
     margin-bottom: ${CONTENT_SPACING.l};
-    margin-top: ${CONTENT_SPACING.l};
+    margin-top: 0;
     margin-left: ${CONTENT_SPACING.l};
-    fill: #ffffff;
+    fill: ${FOREGROUND_COLOR};
+    &:hover {
+        fill: ${HOVER_COLOR};
+    }
 `
 
 const TitleBar = () => {

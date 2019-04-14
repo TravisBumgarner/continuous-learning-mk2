@@ -7,6 +7,7 @@ const DefaultText = styled.p`
     line-height: 1.5;
     margin-bottom: ${CONTENT_SPACING.m};
     margin-top: ${CONTENT_SPACING.m};
+    font-weight: 100;
 
     &:first-child {
         margin: 0;

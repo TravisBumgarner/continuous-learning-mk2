@@ -21,11 +21,6 @@ const TEXT_FONT_SIZES = {
     m: '1.0rem'
 }
 
-const ICON_COLOR = {
-    initial: '#000',
-    hover: 'rgb(74, 207, 160)'
-}
-
 const ICON_FONT_SIZES = {
     ...HEADER_FONT_SIZES
 }
@@ -53,10 +48,14 @@ const MEDIA = Object.keys(sizes).reduce((acc, label) => {
 
 const PAGE_THEME = styled.div``
 
+const BACKGROUND_COLOR = '#fff'
+const FOREGROUND_COLOR = '#000'
+const HOVER_COLOR = '#FFB266'
+
 const GlobalStyle = createGlobalStyle`
     html {
-        background-color: #6666ff;
-        color: #ffffff;
+        background-color: ${BACKGROUND_COLOR};
+        color: ${FOREGROUND_COLOR};
         font-size: 18px;
         font-family: ${FONT_FAMILY_HEADER};
         padding: ${CONTENT_SPACING.l};
@@ -64,12 +63,12 @@ const GlobalStyle = createGlobalStyle`
         ${MEDIA.tablet`font-size: 14px;`}
     }
     a {
-        color: #ffffff;
+        color: ${FOREGROUND_COLOR};
         font-weight: 100;
         text-decoration: none;
         text-transform: uppercase;
         &:hover{
-            color: #FFB266
+            color: ${HOVER_COLOR}
         }
     }
 `
@@ -86,5 +85,7 @@ export {
     HEADER_FONT_SIZES,
     TEXT_FONT_SIZES,
     ICON_FONT_SIZES,
-    ICON_COLOR
+    FOREGROUND_COLOR,
+    BACKGROUND_COLOR,
+    HOVER_COLOR
 }
