@@ -10,7 +10,7 @@ import * as routes from './src/server/routes'
 import { VALID_SUB_COMMANDS } from './src/server/constants'
 import { logger } from './src/server/utilities'
 
-const router = express().Router
+const router = express.Router()
 
 if (process.env.NODE_ENV === 'production') {
     Sentry.init({ dsn: 'https://07e183b574e24ba6ac7eb2a668e6736b@sentry.io/1317415' })
@@ -43,8 +43,6 @@ router.get('/auth', async (request, response, next) => {
     const responseBody = await routes.auth(request)
     response.redirect('http://letspair.online/welcome')
 })
-
-router.get('/ok', (request, response, next) => response.send('Service is running'))
 
 if (process.env.NODE_ENV === 'production') {
     // The error handler must be before any other error middleware

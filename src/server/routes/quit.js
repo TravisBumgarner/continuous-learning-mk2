@@ -1,5 +1,5 @@
-import { users } from "../db"
-import { ATTACHMENT_COLOR } from "../constants"
+import { users } from '../db'
+import { ATTACHMENT_COLOR } from '../constants'
 
 const generateBody = async ({ user_id }) => {
     const wasDeleted = await users.remove(user_id)
@@ -9,9 +9,9 @@ const generateBody = async ({ user_id }) => {
                 color: ATTACHMENT_COLOR,
                 fields: [
                     {
-                        title: wasDeleted ? "We're sad to see you go :(" : "Error",
+                        title: wasDeleted ? "We're sad to see you go :(" : 'Error',
                         value: wasDeleted
-                            ? `<@${user_id}> has been removed. You won't be paired starting next week.`
+                            ? `<@${user_id}> has been removed. You won't be paired next time.`
                             : `<@${user_id}> does not exist.`
                     }
                 ]

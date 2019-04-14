@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'production') {
     // Sentry must me the first middleware
     app.use(Sentry.Handlers.requestHandler())
 }
- 
+
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
@@ -41,8 +41,6 @@ app.get('/auth', async (request, response, next) => {
     const responseBody = await routes.auth(request)
     response.redirect('http://letspair.online/welcome')
 })
-
-app.get('/ok', (request, response, next) => response.send('Service is running'))
 
 if (process.env.NODE_ENV === 'production') {
     // The error handler must be before any other error middleware
