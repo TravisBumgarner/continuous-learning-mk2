@@ -22,8 +22,8 @@ const LINKS_CONTENT = [
         to: '/'
     },
     {
-        text: 'Contribute',
-        to: '/contribute'
+        text: 'Setup',
+        to: '/setup'
     }
 ]
 

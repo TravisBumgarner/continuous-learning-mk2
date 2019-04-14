@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import { GlobalStyle } from 'theme'
 
-import { TitleBar, Navigation, Contribute, Introduction, Error } from './components'
+import { TitleBar, Setup, Navigation, Introduction, Error } from './components'
 import { AppWrapper } from './App.styles'
 
 const App = () => {
@@ -16,8 +16,8 @@ const App = () => {
                     <Navigation />
                     <Switch>
                         <Route exact path="/" component={Introduction} />
-                        <Route path="/contribute" component={Contribute} />
                         <Route path="/introduction" component={Introduction} />
+                        <Route path="/setup" component={Setup} />
                         <Route path="/" component={Error} />
                     </Switch>
                 </AppWrapper>
