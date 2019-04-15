@@ -45,7 +45,7 @@ router.post('/', async (request, response, next) => {
         }
 
         case 'feedback': {
-            jsonBody = await routes.feedback({request.body})
+            jsonBody = await routes.feedback(request.body)
             break
         }
 
