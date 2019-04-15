@@ -1,7 +1,7 @@
-import { exercises, users } from "../db"
-import { ATTACHMENT_COLOR } from "../constants"
+import { exercises, users } from '../db'
+import { ATTACHMENT_COLOR } from '../constants'
 
-const formatAsCode = text => "```" + text + "```"
+const formatAsCode = text => '```' + text + '```'
 
 const generateBody = async ({ user_id }) => {
     const partner = await users.getPartner(user_id)
@@ -21,8 +21,8 @@ const generateBody = async ({ user_id }) => {
                     color: ATTACHMENT_COLOR,
                     fields: [
                         {
-                            title: "Get Coding!",
-                            value: `This week, you'll be working with <@${partner_id}> on the problem below. Reach out, pick a time, and get to coding.`
+                            title: 'Get Coding!',
+                            value: `This week, you'll be working with <@${partner_id}> on the problem below. Reach out, pick a time, and get coding.`
                         },
                         {
                             title: `${exercise[0].title}`,
@@ -39,7 +39,7 @@ const generateBody = async ({ user_id }) => {
                     color: ATTACHMENT_COLOR,
                     fields: [
                         {
-                            title: "Too Fast!",
+                            title: 'Too Fast!',
                             value: "You'll be matched with your first partner next week!"
                         }
                     ]
@@ -53,8 +53,8 @@ const generateBody = async ({ user_id }) => {
                     color: ATTACHMENT_COLOR,
                     fields: [
                         {
-                            title: "Hmmmm...",
-                            value: "Please make an account first."
+                            title: 'Hmmmm...',
+                            value: 'Please make an account first.'
                         }
                     ]
                 }

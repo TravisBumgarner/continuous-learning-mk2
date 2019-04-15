@@ -6,17 +6,16 @@ let apiHost
 let publicPath
 
 setupEnv = () => {
-    console.log(process.env.NODE_ENV)
     switch (process.env.NODE_ENV) {
         case 'development':
-            apiHost = "'http://localhost:8000/'"
+            apiHost = "'http://localhost:5000/'"
             publicPath = '/'
             break
+        case 'production':
         default:
-            apiHost = "'http://localhost:8000/'"
+            apiHost = "'letspair.online/'"
             publicPath = '/static'
     }
-    console.log(apiHost)
 }
 setupEnv()
 
