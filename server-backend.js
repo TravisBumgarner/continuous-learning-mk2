@@ -60,11 +60,11 @@ router.post('/', async (request, response, next) => {
             break
         }
         case 'help': {
-            jsonBody = await routes.help()
+            jsonBody = await routes.help(request.body)
             break
         }
         default: {
-            jsonBody = await routes.help(subCommand)
+            jsonBody = await routes.help(request.body, subCommand)
             break
         }
     }
