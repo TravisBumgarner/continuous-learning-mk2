@@ -21,6 +21,7 @@ router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json())
 
 router.use(middleware.validateSlackRequest)
+router.use(middleware.checkCredentials)
 
 router.post('/', async (request, response, next) => {
     // const message = logger({ request: request.body, type: logger.types.log, route: '/', message: 'slash command' })

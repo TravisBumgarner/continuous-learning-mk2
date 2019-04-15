@@ -1,3 +1,4 @@
-import validateSlackRequest from "./validateSlackRequest"
+import validateSlackRequest from './validateSlackRequest'
+import checkCredentials from './checkCredentials'
 
-export { validateSlackRequest }
+export { validateSlackRequest, checkCredentials }
