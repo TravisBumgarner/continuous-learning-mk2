@@ -38,18 +38,14 @@ router.post('/', async (request, response, next) => {
 
     let jsonBody
     switch (subCommand) {
+        case 'register':
         case '': {
             jsonBody = await routes.welcome(request.body)
             break
         }
 
-        case 'register': {
-            jsonBody = await routes.register(request.body)
-            break
-        }
-
         case 'feedback': {
-            jsonBody = await routes.feedback(request.body)
+            jsonBody = await routes.feedback({request.body})
             break
         }
 
@@ -62,9 +58,12 @@ router.post('/', async (request, response, next) => {
             jsonBody = await routes.status(request.body)
             break
         }
-        case 'help':
+        case 'help': {
+            jsonBody = await routes.help()
+            break
+        }
         default: {
-            jsonBody = await routes.help(request.body)
+            jsonBody = await routes.help(subCommand)
             break
         }
     }
@@ -78,7 +77,6 @@ router.get('/make_groups', (request, response, next) => {
 
 router.get('/auth', async (request, response, next) => {
     const responseBody = await routes.auth(request)
-    console.log(responseBody)
     response.redirect('http://letspair.online/welcome')
 })
 

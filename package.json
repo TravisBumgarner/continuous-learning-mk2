@@ -7,7 +7,9 @@
     "frontend:dev": "NODE_ENV=development webpack-dev-server --hot --inline --mode=development --config webpack.js",
     "frontend:prod": "npm run bundle; node server.js",
     "server:dev": "NODE_ENV=development nodemon index.js",
-    "bundle": "rm ./dist/index.html; rm ./dist/app*; mkdir ./dist; NODE_ENV=production; webpack --mode=production --config webpack.js"
+    "bundle": "rm ./dist/index.html; rm ./dist/app*; mkdir ./dist; NODE_ENV=production; webpack --mode=production --config webpack.js",
+    "migrate:latest": "knex migrate:latest --knexfile ./src/server/db/knexfile.js",
+    "seed:run": "knex seed:run --knexfile ./src/server/db/knexfile.js"
   },
   "author": "Travis Bumgarner",
   "license": "ISC",

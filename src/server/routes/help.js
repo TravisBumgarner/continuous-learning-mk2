@@ -6,6 +6,11 @@ import { formatCommandExample } from '../utilities'
 
 const GETTING_STARTED_COMMANDS = [
     {
+        subCommand: 'register',
+        message: 'Register account',
+        example: formatCommandExample('register')
+    },
+    {
         subCommand: 'help',
         message: 'Display this menu',
         example: formatCommandExample('help')
@@ -38,12 +43,18 @@ const formatSectionContent = section => {
         .join('\n')
 }
 
-const generateBody = () => {
+const generateBody = subCommand => {
     return {
         attachments: [
             {
                 color: ATTACHMENT_COLOR,
                 fields: [
+                    {
+                        title: 'Whoops!',
+                        value: `${formatCommandExample(
+                            subCommand
+                        )} is not a valid command. Check out the available commands below.`
+                    },
                     {
                         title: 'Getting Started',
                         value: formatSectionContent(GETTING_STARTED_COMMANDS)
