@@ -19,11 +19,15 @@ const NavigationLink = styled(Link)`
 const LINKS_CONTENT = [
     {
         text: 'Home',
-    to: '/'
+        to: '/'
     },
     {
         text: 'Setup',
         to: '/setup'
+    },
+    {
+        text: 'FAQ',
+        to: '/faq'
     }
 ]
 

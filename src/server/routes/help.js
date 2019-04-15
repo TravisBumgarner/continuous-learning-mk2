@@ -11,11 +11,6 @@ const GETTING_STARTED_COMMANDS = [
         example: formatCommandExample('help')
     },
     {
-        subCommand: 'register',
-        message: 'Enroll in Continuous Learning',
-        example: formatCommandExample('register')
-    },
-    {
         subCommand: 'status',
         message: 'Check your exercise and partner for this week.',
         example: formatCommandExample('status')

@@ -19,7 +19,7 @@ const generateBody = async ({ user_id }) => {
                     fields: [
                         {
                             title: 'Welcome back!',
-                            value: `This week, you'll be working with USER HERE on the problem below. Reach out, pick a time, and get to coding.`
+                            value: `Check out ${formatCommandExample('status')} to see your partner for the week.`
                         }
                     ]
                 }
