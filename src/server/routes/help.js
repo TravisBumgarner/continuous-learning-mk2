@@ -2,7 +2,7 @@ import { ROOT_COMMAND, ATTACHMENT_COLOR } from '../constants'
 import { formatCommandExample } from '../utilities'
 import { format } from 'url'
 
-const getGeneralCommands = user_status => {
+const getGeneralCommands = ({ user_is_intern, user_status }) => {
     const REGISTER = {
         subCommand: 'register',
         message: 'Register account',
@@ -11,19 +11,19 @@ const getGeneralCommands = user_status => {
 
     const PAUSE = {
         subCommand: 'pause',
-        message: "Sit out for next week's kata",
+        message: 'Sit out for next kata',
         example: formatCommandExample('pause')
     }
 
     const RESUME = {
         subCommand: 'resume',
-        message: "Sit back in for next week's kata",
+        message: 'Sit back in for next kata',
         example: formatCommandExample('resume')
     }
 
     const REMOVE = {
         subCommand: 'remove',
-        message: "Remove yourself from Let's Pair",
+        message: 'Remove yourself from all future katas',
         example: formatCommandExample('remove')
     }
 
@@ -49,18 +49,20 @@ const getGeneralCommands = user_status => {
         commands.push(REGISTER)
     }
 
-    if (user_status === 'active') {
-        commands.push(PAUSE)
-        commands.push(REMOVE)
-    }
+    if (!user_is_intern) {
+        if (user_status === 'active') {
+            commands.push(PAUSE)
+            commands.push(REMOVE)
+        }
 
-    if (user_status === 'paused') {
-        commands.push(RESUME)
-        commands.push(REMOVE)
-    }
+        if (user_status === 'paused') {
+            commands.push(RESUME)
+            commands.push(REMOVE)
+        }
 
-    if (user_status === 'removed') {
-        commands.push(RESUME)
+        if (user_status === 'removed') {
+            commands.push(RESUME)
+        }
     }
 
     return {
@@ -69,8 +71,8 @@ const getGeneralCommands = user_status => {
     }
 }
 
-const getAdminCommands = is_admin => {
-    return is_admin
+const getAdminCommands = ({ user_is_admin }) => {
+    return user_is_admin
         ? {
               title: 'Admin',
               value: formatSectionContent([
@@ -103,7 +105,7 @@ const formatSectionContent = section => {
 }
 
 const generateBody = (requestBody, subCommand) => {
-    const { user_is_admin, user_status } = requestBody
+    const { user_is_admin, user_status, user_is_intern } = requestBody
 
     if (subCommand) {
         fields.push({
@@ -112,7 +114,7 @@ const generateBody = (requestBody, subCommand) => {
         })
     }
 
-    const fields = [getGeneralCommands(user_status), getAdminCommands(user_is_admin)]
+    const fields = [getGeneralCommands({ user_status, user_is_intern }), getAdminCommands(user_is_admin)]
 
     return {
         attachments: [
