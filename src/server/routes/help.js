@@ -114,7 +114,7 @@ const generateBody = (requestBody, subCommand) => {
         })
     }
 
-    const fields = [getGeneralCommands({ user_status, user_is_intern }), getAdminCommands(user_is_admin)]
+    const fields = [getGeneralCommands({ user_status, user_is_intern }), getAdminCommands({ user_is_admin })]
 
     return {
         attachments: [
