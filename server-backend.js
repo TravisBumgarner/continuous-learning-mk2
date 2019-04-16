@@ -50,13 +50,23 @@ router.post('/', async (request, response, next) => {
             break
         }
 
-        case 'quit': {
-            jsonBody = await routes.quit(request.body)
+        case 'remove': {
+            jsonBody = await routes.remove(request.body)
             break
         }
 
-        case 'status': {
-            jsonBody = await routes.status(request.body)
+        case 'pause': {
+            jsonBody = await routes.pause(request.body)
+            break
+        }
+
+        case 'resume': {
+            jsonBody = await routes.resume(request.body)
+            break
+        }
+
+        case 'my_exercise': {
+            jsonBody = await routes.my_exercise(request.body)
             break
         }
 

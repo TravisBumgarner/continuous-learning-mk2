@@ -1,7 +1,10 @@
-import knex from "../knex"
+import knex from '../knex'
 
 const getActive = () => {
-    return knex.select().from("users")
+    return knex
+        .select()
+        .from('users')
+        .where('status', 'active')
 }
 
 export default getActive

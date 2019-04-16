@@ -1,57 +1,98 @@
 import { ROOT_COMMAND, ATTACHMENT_COLOR } from '../constants'
 import { formatCommandExample } from '../utilities'
+import { format } from 'url'
 
-// To add commands, either append them to an existing sub group of commands or create a new sub group,
-// and add a new section to HELP_COMMANDS
-
-const GETTING_STARTED_COMMANDS = [
-    {
+const getGeneralCommands = user_status => {
+    const REGISTER = {
         subCommand: 'register',
         message: 'Register account',
         example: formatCommandExample('register')
-    },
-    {
-        subCommand: 'help',
-        message: 'Display this menu',
-        example: formatCommandExample('help')
-    },
-    {
-        subCommand: 'status',
-        message: 'Check your exercise and partner for this week.',
-        example: formatCommandExample('status')
     }
-]
 
-const MISC_COMMANDS = [
-    {
-        subCommand: 'feedback',
-        message: 'Tell us what you think',
-        example: formatCommandExample('feedback Getting there!')
-    },
-    {
-        subCommand: 'quit',
-        message: 'Disenroll in Continuous Learning',
-        example: formatCommandExample('quit')
+    const PAUSE = {
+        subCommand: 'pause',
+        message: "Sit out for next week's kata",
+        example: formatCommandExample('pause')
     }
-]
 
-const ADMIN_COMMANDS = [
-    {
-        subCommand: 'make_groups',
-        message: 'Create new groups',
-        example: formatCommandExample('make_groups')
-    },
-    {
-        subCommand: 'set_next',
-        message: 'Set next kata',
-        example: formatCommandExample('set_next')
-    },
-    {
-        subCommand: 'get_next',
-        message: 'Get next kata',
-        example: formatCommandExample('get_next')
+    const RESUME = {
+        subCommand: 'resume',
+        message: "Sit back in for next week's kata",
+        example: formatCommandExample('resume')
     }
-]
+
+    const REMOVE = {
+        subCommand: 'remove',
+        message: "Remove yourself from Let's Pair",
+        example: formatCommandExample('remove')
+    }
+
+    const commands = [
+        {
+            subCommand: 'help',
+            message: 'Display this menu',
+            example: formatCommandExample('help')
+        },
+        {
+            subCommand: 'my_exercise',
+            message: 'Check your exercise and partner for this week.',
+            example: formatCommandExample('my_exercise')
+        },
+        {
+            subCommand: 'feedback',
+            message: 'Tell us what you think',
+            example: formatCommandExample('feedback Getting there!')
+        }
+    ]
+
+    if (!user_status) {
+        commands.push(REGISTER)
+    }
+
+    if (user_status === 'active') {
+        commands.push(PAUSE)
+        commands.push(REMOVE)
+    }
+
+    if (user_status === 'paused') {
+        commands.push(RESUME)
+        commands.push(REMOVE)
+    }
+
+    if (user_status === 'removed') {
+        commands.push(RESUME)
+    }
+
+    return {
+        title: 'General',
+        value: formatSectionContent(commands)
+    }
+}
+
+const getAdminCommands = is_admin => {
+    return is_admin
+        ? {
+              title: 'Admin',
+              value: formatSectionContent([
+                  {
+                      subCommand: 'make_groups',
+                      message: 'Create new groups',
+                      example: formatCommandExample('make_groups')
+                  },
+                  {
+                      subCommand: 'set_next',
+                      message: 'Set next kata',
+                      example: formatCommandExample('set_next')
+                  },
+                  {
+                      subCommand: 'get_next',
+                      message: 'Get next kata',
+                      example: formatCommandExample('get_next')
+                  }
+              ])
+          }
+        : {}
+}
 
 const formatSectionContent = section => {
     return section
@@ -62,7 +103,7 @@ const formatSectionContent = section => {
 }
 
 const generateBody = (requestBody, subCommand) => {
-    const fields = []
+    const { user_is_admin, user_status } = requestBody
 
     if (subCommand) {
         fields.push({
@@ -71,22 +112,7 @@ const generateBody = (requestBody, subCommand) => {
         })
     }
 
-    fields.push({
-        title: 'Getting Started',
-        value: formatSectionContent(GETTING_STARTED_COMMANDS)
-    })
-
-    fields.push({
-        title: 'Misc',
-        value: formatSectionContent(MISC_COMMANDS)
-    })
-
-    if (requestBody.user_is_admin) {
-        fields.push({
-            title: 'Admin',
-            value: formatSectionContent(ADMIN_COMMANDS)
-        })
-    }
+    const fields = [getGeneralCommands(user_status), getAdminCommands(user_is_admin)]
 
     return {
         attachments: [

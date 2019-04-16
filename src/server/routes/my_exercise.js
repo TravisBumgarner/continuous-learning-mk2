@@ -30,7 +30,7 @@ const generateBody = async ({ user_id, user_exists }) => {
                 }
             ]
         }
-    } else if (userExists && !partner) {
+    } else if (user_exists && !partner) {
         return {
             attachments: [
                 {

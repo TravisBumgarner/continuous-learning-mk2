@@ -8,6 +8,7 @@ exports.up = function(knex, Promise) {
         table.text('team_id')
         table.text('access_token')
         table.boolean('is_admin').defaultTo(false)
+        table.boolean('status').defaultTo('active')
         table.boolean('is_intern').defaultTo(false)
         table.timestamp('created_at').defaultTo(knex.fn.now())
     })
