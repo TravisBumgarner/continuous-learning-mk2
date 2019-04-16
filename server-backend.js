@@ -70,6 +70,11 @@ router.post('/', async (request, response, next) => {
             break
         }
 
+        case 'make_groups': {
+            jsonBody = await routes.make_groups(request.body)
+            break
+        }
+
         case 'help': {
             jsonBody = await routes.help(request.body)
             break
