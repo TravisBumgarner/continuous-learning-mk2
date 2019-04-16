@@ -8,6 +8,7 @@ const checkCredentials = async (request, response, next) => {
     const userExists = !!user.length
 
     request.body.user_exists = userExists
+    request.body.user_is_intern = !!(userExists && user[0].is_intern)
     request.body.user_is_admin = !!(userExists && user[0].is_admin)
 
     console.log(request.body)

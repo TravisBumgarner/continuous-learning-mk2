@@ -3,15 +3,13 @@ import { ATTACHMENT_COLOR } from '../constants'
 
 const formatAsCode = text => '```' + text + '```'
 
-const generateBody = async ({ user_id }) => {
+const generateBody = async ({ user_id, user_exists }) => {
     const partner = await users.getPartner(user_id)
-    const user = await users.getById(user_id)
-    const userExists = user.length
 
     let value
     let title
 
-    if (userExists && partner) {
+    if (user_exists && partner) {
         const partner_id = partner[0].user_id
         const exercise = await exercises.getActive()
 

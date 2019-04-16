@@ -7,11 +7,8 @@ import config from '../config'
 
 const formatAsCode = text => '```' + text + '```'
 
-const generateBody = async ({ user_id }) => {
-    const user = await users.getById(user_id)
-    const userExists = user.length
-
-    if (userExists) {
+const generateBody = async ({ user_id, user_exists }) => {
+    if (user_exists) {
         return {
             attachments: [
                 {
